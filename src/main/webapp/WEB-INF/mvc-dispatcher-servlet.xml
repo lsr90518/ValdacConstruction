@@ -7,9 +7,36 @@
 
     <context:component-scan base-package="com.toyo.vc"/>
 
+    <!-- データソースをセットアップする -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://173.194.105.61:3306/valdac"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="cloud@tv1"></property>
+        <!--<property name="url" value="jdbc:mysql://49.212.154.30:3306/valdac"></property>-->
+        <!--<property name="username" value="sakura"></property>-->
+        <!--<property name="password" value="sakura"></property>-->
+
+        <property name="validationQuery" value="SELECT 1" />
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="com.ValdacBeta.entity"/>
+        <property name="mapperLocations" value="classpath*:*Mapper.xml" />
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ValdacBeta.dao" />
+    </bean>
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/" />
+    <mvc:resources mapping="/img/**" location="/WEB-INF/img/" />
+    <mvc:annotation-driven />
 
 </beans>
