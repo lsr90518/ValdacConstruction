@@ -15,11 +15,14 @@ public class UserService {
     @Resource
     UserMapper userMapper;
 
+    public User getUserByUseridAndPassword(String userid,String password){
+        User userTem=new User();
+        userTem.setUserid(userid);
+        userTem.setPassword(password);
 
-    public User getUserByUserid(String userid,String password){
-        User user = userMapper.findByUserId(userid);
+        User user = userMapper.findByUserId(userTem);
 
-        if(password.equals(user.getPassword())){
+        if(user!=null){
             return user;
         } else {
             return null;
