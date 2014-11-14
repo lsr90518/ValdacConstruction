@@ -1,10 +1,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <context:component-scan base-package="com.toyo.vc"/>
 
     <!-- データソースをセットアップする -->
@@ -22,21 +22,23 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="typeAliasesPackage" value="com.ValdacBeta.entity"/>
+        <property name="typeAliasesPackage" value="com.toyo.vc.entity"/>
         <property name="mapperLocations" value="classpath*:*Mapper.xml" />
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.ValdacBeta.dao" />
+        <property name="basePackage" value="com.toyo.vc.dao" />
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
     </bean>
+
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
-    <mvc:resources mapping="/js/**" location="/WEB-INF/js/" />
-    <mvc:resources mapping="/img/**" location="/WEB-INF/img/" />
-    <mvc:annotation-driven />
 
+    <!--<mvc:resources mapping="/css/**" location="/WEB-INF/pages/css/"/>-->
+    <!--<mvc:resources mapping="/js/**" location="/WEB-INF/pages/js/" />-->
+    <!--<mvc:resources mapping="/img/**" location="/WEB-INF/pages/img/" />-->
+    <mvc:annotation-driven />
 </beans>
