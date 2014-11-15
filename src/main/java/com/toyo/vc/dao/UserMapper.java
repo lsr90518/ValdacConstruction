@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface UserMapper {
 //    @Select("select * from user where userId=#{userId}")
-    public User findByUserId(String userid);
+    public User findByUserId(User user);
 }

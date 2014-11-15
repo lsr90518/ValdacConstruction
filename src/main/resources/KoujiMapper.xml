@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.toyo.vc.dao.KoujiMapper">
+
+    <select id="findByUserId" parameterType="String" resultType="Kouji">
+        select * from kouji where responsibility=#{userid}
+    </select>
+
+    <select id="findLastedTenKoujiByResponsibility" parameterType="String" resultType="Kouji">
+        select * from kouji where responsibility=#{userid} ORDER BY bgnYmd DESC limit 10
+    </select>
+
+    <select id="findUpdateTenKoujiByResponsibility" parameterType="String" resultType="Kouji">
+        select * from kouji where responsibility=#{userid} ORDER BY updDate DESC limit 10;
+    </select>
+
+    <insert id="insertKouji" parameterType="Kouji">
+        insert into
+        kouji(kjNo, kjMeisyo,kjKbn,bgnYmd,endYmd,nextYmd,nendo,syukan,gyosyaRyakuA,location,status,responsibility, trkDate, updDate)
+        values(
+        #{kjNo},
+        #{kjMeisyo},
+        #{kjKbn},
+        #{bgnYmd},
+        #{endYmd},
+        #{nextYmd},
+        #{nendo},
+        #{syukan},
+        #{gyosyaRyakuA},
+        #{location},
+        #{status},
+        #{responsibility},
+        #{trkDate},
+        #{updDate}
+        )
+    </insert>
+
+    <select id="getLastInsertId" resultType="int">
+        select id from kouji ORDER BY id DESC limit 1
+    </select>
+
+</mapper>

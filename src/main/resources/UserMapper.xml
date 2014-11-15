@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.toyo.vc.dao.UserMapper">
 
-    <select id="findByUserId" parameterType="String" resultType="User">
-        select * from user where userId=#{userId}
+    <select id="findByUserId" parameterType="User" resultType="User">
+        select * from user where userid=#{userid} and password=#{password}
     </select>
 
 </mapper>
