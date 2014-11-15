@@ -2,5 +2,5 @@ workspace.xml
 .idea/artifacts/ValdacConstruction_war.xml
 .idea/artifacts/ValdacConstruction_war_exploded.xml
 ValdacConstruction.iml
-target/*
-.idea/libraries/*
+target/
+.idea/libraries/

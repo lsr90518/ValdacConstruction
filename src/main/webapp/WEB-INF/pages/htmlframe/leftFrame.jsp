@@ -33,13 +33,13 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li id="left-menu-new">
-                    <a href="/item/add">
-                        <i class="fa fa-paste"></i> <span>新規登録</span>
+                    <a href="#">
+                        <i class="fa fa-paste"></i> <span>新規工事</span>
                     </a>
                 </li>
                 <li id="left-menu-edit">
-                    <a href="/item">
-                        <i class="fa fa-edit"></i> <span>アイテム一覧</span>
+                    <a href="#">
+                        <i class="fa fa-edit"></i> <span>工事一覧</span>
                     </a>
                 </li>
             </ul>

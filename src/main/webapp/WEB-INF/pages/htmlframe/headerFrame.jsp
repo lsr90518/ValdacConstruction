@@ -9,7 +9,7 @@
 <header class="header">
     <a href="/" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
-        Valdac
+        工事支援
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -30,7 +30,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
-                        <li class="user-header bg-light-blue">
+                        <li class="user-header bg-light-blue-gradient">
                             <img id="headerProfile" src="${imageRoot}${user.profile}" class="img-circle" alt="User Image" />
                             <p>
                                 ${user.username} - ${user.department}

@@ -10,7 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="htmlframe/headFrame.jsp" />
 
-<body class="skin-blue">
+<body class="skin-black">
 <!-- header logo: style can be found in header.less -->
 <c:import url="htmlframe/headerFrame.jsp"/>
 <div class="wrapper row-offcanvas row-offcanvas-left">

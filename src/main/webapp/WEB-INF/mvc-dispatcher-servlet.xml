@@ -37,8 +37,8 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--<mvc:resources mapping="/css/**" location="/WEB-INF/pages/css/"/>-->
-    <!--<mvc:resources mapping="/js/**" location="/WEB-INF/pages/js/" />-->
-    <!--<mvc:resources mapping="/img/**" location="/WEB-INF/pages/img/" />-->
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/" />
+    <mvc:resources mapping="/img/**" location="/WEB-INF/img/" />
     <mvc:annotation-driven />
 </beans>
