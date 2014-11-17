@@ -9,6 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="htmlframe/headFrame.jsp" />
+<link href="/css/main.css" rel="stylesheet" />
 <html class="bg-black"><head _wxhkphogpkobbkjccgfifhfjlahnoocnan_="shake_1.0">
     <meta charset="UTF-8">
     <title>AdminLTE | Log in</title>
