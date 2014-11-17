@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.toyo.vc.dao.ItemMapper">
+
+    <select id="findByLocationName" parameterType="String" resultType="Valve">
+        select * from kikisystem
+        where locationName=#{locationName}
+    </select>
+
+    <select id="findKikiByKikisysIdSyukan" parameterType="String" resultType="Kiki">
+--         SELECT DISTINCT kiki.kikiId, kikiBunrui, kikiBunruiSeq, kikiNo, kikiMei, syukan, makerRyaku, maker, katasikiNo, serialNo,orderNo, bikou, imageId, trkDate, updDate
+        SELECT DISTINCT kiki.kikiId, kiki.*
+        FROM kiki, kikisystemrelation
+        WHERE kikisystemrelation.kikisysid=#{kikiSysId}
+        AND kikisystemrelation.kikiid=kiki.kikiId
+        <if test="syukan.length()>0">
+            and kiki.syukan = #{syukan}
+        </if>
+    </select>
+
+    <select id="findKikisysBykikisysId" parameterType="String" resultType="Valve">
+        select * from kikisystem
+        where kikiSysId=#{kikiSysId}
+    </select>
+
+    <select id="findKikiByKikiId" parameterType="String" resultType="Kiki">
+        select * from kiki
+        where kikiId=#{kikiId}
+    </select>
+</mapper>
