@@ -3,15 +3,70 @@
 <mapper namespace="com.toyo.vc.dao.KoujiMapper">
 
     <select id="findByUserId" parameterType="String" resultType="Kouji">
-        select * from kouji where responsibility=#{userid}
+        select * from kouji
+        <where>
+            <if test="value.length>0">
+                responsibility = #{userid}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByUserIdAndKoujiStatus" parameterType="Kouji" resultType="Kouji">
+        select * from kouji
+        <where>
+            <if test="responsibility.length()>0">
+                 responsibility = #{responsibility}
+            </if>
+            <if test="status.length()>0">
+                and status = #{status}
+            </if>
+        </where>
     </select>
 
     <select id="findLastedTenKoujiByResponsibility" parameterType="String" resultType="Kouji">
-        select * from kouji where responsibility=#{userid} ORDER BY bgnYmd DESC limit 10
+        select * from kouji
+        <where>
+            <if test="value.length>0">
+                responsibility=#{userid}
+            </if>
+        </where>
+        ORDER BY bgnYmd DESC limit 10
+    </select>
+
+    <select id="findLastedTenKoujiByResponsibilityAndKoujiStatus" parameterType="Kouji" resultType="Kouji">
+        select * from kouji
+        <where>
+            <if test="responsibility.length()>0">
+                  responsibility = #{responsibility}
+            </if>
+            <if test="status.length()>0">
+               and  status = #{status}
+            </if>
+        </where>
+        ORDER BY bgnYmd DESC limit 10
     </select>
 
     <select id="findUpdateTenKoujiByResponsibility" parameterType="String" resultType="Kouji">
-        select * from kouji where responsibility=#{userid} ORDER BY updDate DESC limit 10;
+        select * from kouji
+        <where>
+            <if test="value.length>0">
+                responsibility=#{userid}
+            </if>
+        </where>
+        ORDER BY updDate DESC limit 10
+    </select>
+
+    <select id="findUpdateTenKoujiByResponsibilityAndKoujiStatus" parameterType="Kouji" resultType="Kouji">
+        select * from kouji
+        <where>
+            <if test="responsibility.length()>0">
+                responsibility = #{responsibility}
+            </if>
+            <if test="status.length()>0">
+                and status = #{status}
+            </if>
+        </where>
+        ORDER BY updDate DESC limit 10
     </select>
 
     <insert id="insertKouji" parameterType="Kouji">
@@ -34,6 +89,30 @@
         #{updDate}
         )
     </insert>
+
+    <update id="updateKouji" parameterType="Kouji">
+        update kouji
+        set kjNo = #{kjNo},
+        kjMeisyo = #{kjMeisyo},
+        kjKbn = #{kjKbn},
+        bgnYmd = #{bgnYmd},
+        endYmd = #{endYmd},
+        nextYmd = #{nextYmd},
+        nendo = #{nendo},
+        syukan = #{syukan},
+        gyosyaRyakuA = #{gyosyaRyakuA},
+        location = #{location},
+        status = #{status},
+        responsibility = #{responsibility},
+        updDate = #{updDate}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKouji" parameterType="Kouji" >
+        DELETE
+        FROM kouji
+        WHERE id=#{id}
+    </delete>
 
     <select id="getLastInsertId" resultType="int">
         select id from kouji ORDER BY id DESC limit 1
