@@ -1,5 +1,6 @@
 package com.toyo.vc.controller;
 
+import com.toyo.vc.entity.Kouji;
 import com.toyo.vc.service.KoujiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,11 +25,13 @@ public class KoujiController {
     @RequestMapping(method = RequestMethod.GET)
     public String index(HttpSession session){
 
-        return "index";
+        return "/kouji/index";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getKoujiById(@PathVariable("id")String id, ModelMap modelMap, HttpSession session){
-        return "index";
+        Kouji kouji = new Kouji();
+        modelMap.addAttribute("kouji",kouji);
+        return "/kouji/index";
     }
 }

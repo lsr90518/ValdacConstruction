@@ -350,6 +350,14 @@ Component: timeline
     opacity: 0;
 }
 
+/* book marker right */
+.currentBookmark{
+    border-right: solid 2px #008785;
+    border-top: solid 1px #cccccc;
+    border-bottom: solid 1px #cccccc;
+    box-shadow: 10px 0 15px 1px #eee;
+}
+
 /* Background colors */
 .bg-red,
 .bg-yellow,
