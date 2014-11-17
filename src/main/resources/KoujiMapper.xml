@@ -5,8 +5,20 @@
     <select id="findByUserId" parameterType="String" resultType="Kouji">
         select * from kouji
         <where>
-            <if test="value!=null">
+            <if test="value.length>0">
                 responsibility = #{userid}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByUserIdAndKoujiStatus" parameterType="Kouji" resultType="Kouji">
+        select * from kouji
+        <where>
+            <if test="responsibility.length()>0">
+                 responsibility = #{responsibility}
+            </if>
+            <if test="status.length()>0">
+                and status = #{status}
             </if>
         </where>
     </select>
@@ -14,8 +26,21 @@
     <select id="findLastedTenKoujiByResponsibility" parameterType="String" resultType="Kouji">
         select * from kouji
         <where>
-            <if test="value!=null">
+            <if test="value.length>0">
                 responsibility=#{userid}
+            </if>
+        </where>
+        ORDER BY bgnYmd DESC limit 10
+    </select>
+
+    <select id="findLastedTenKoujiByResponsibilityAndKoujiStatus" parameterType="Kouji" resultType="Kouji">
+        select * from kouji
+        <where>
+            <if test="responsibility.length()>0">
+                  responsibility = #{responsibility}
+            </if>
+            <if test="status.length()>0">
+               and  status = #{status}
             </if>
         </where>
         ORDER BY bgnYmd DESC limit 10
@@ -24,8 +49,21 @@
     <select id="findUpdateTenKoujiByResponsibility" parameterType="String" resultType="Kouji">
         select * from kouji
         <where>
-            <if test="value!=null">
+            <if test="value.length>0">
                 responsibility=#{userid}
+            </if>
+        </where>
+        ORDER BY updDate DESC limit 10
+    </select>
+
+    <select id="findUpdateTenKoujiByResponsibilityAndKoujiStatus" parameterType="Kouji" resultType="Kouji">
+        select * from kouji
+        <where>
+            <if test="responsibility.length()>0">
+                responsibility = #{responsibility}
+            </if>
+            <if test="status.length()>0">
+                and status = #{status}
             </if>
         </where>
         ORDER BY updDate DESC limit 10
