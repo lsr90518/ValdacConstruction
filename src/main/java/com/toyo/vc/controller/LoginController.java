@@ -27,7 +27,7 @@ public class LoginController {
         User user = (User) session.getAttribute("user");
         session.setAttribute("imageRoot","http://storage.googleapis.com/valdac/");
         if(user != null){
-            return "index";
+            return "redirect:/index";
         } else {
             return "login";
         }
@@ -43,7 +43,7 @@ public class LoginController {
             return "login";
         } else {
             session.setAttribute("user",user);
-            return "index";
+            return "redirect:/index";
         }
     }
 }

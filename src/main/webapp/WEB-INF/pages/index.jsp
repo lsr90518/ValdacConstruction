@@ -13,28 +13,25 @@
 <body class="skin-black">
 <!-- header logo: style can be found in header.less -->
 <c:import url="htmlframe/headerFrame.jsp"/>
-<div class="wrapper row-offcanvas row-offcanvas-left">
+<div class="container">
     <!-- Left side column. contains the logo and sidebar -->
-    <c:import url="htmlframe/leftFrame.jsp" />
 
-    <!-- Right side column. Contains the navbar and content of the page -->
-    <aside class="right-side">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
                 工事支援
             </h1>
-            <%--<ol class="breadcrumb">--%>
-                <%--<li><i class="fa fa-dashboard"></i> Index</li>--%>
-            <%--</ol>--%>
+            <ol class="breadcrumb">
+                <li><i class="fa fa-dashboard"></i> Index</li>
+            </ol>
         </section>
-
+        <hr/>
         <!-- Main content -->
         <section class="content">
 
             <div class="row">
                 <!-- collection -->
-                <div class="col-xs-12">
+                <div class="col-md-8">
 
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
@@ -42,6 +39,9 @@
                             <li class=""><a href="#tab_2" data-toggle="tab">編集履歴</a></li>
 
                             <div class="box-tools">
+                                <div class="pull-right" style="padding: 0 10px 0 10px">
+                                    <button class="btn btn-sm btn-success">+</button>
+                                </div>
                                 <div class="input-group">
                                     <input type="text" name="table_search" id="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search">
                                     <div class="input-group-btn">
@@ -53,178 +53,79 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
                                 <table class="table table-hover kouji-table">
+                                    <thead>
+                                        <tr>
+                                            <th>工事番号</th>
+                                            <th>工事名</th>
+                                            <th>開始日付</th>
+                                            <th>責任者</th>
+                                            <th>状態</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Reason</th>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Jane Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-danger">Denied</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Jane Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-danger">Denied</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Jane Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-danger">Denied</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Jane Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-danger">Denied</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Jane Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-
+                                    <c:forEach items="${lastedKoujiList}" var="kouji">
+                                        <tr>
+                                            <td>${kouji.kjNo}</td>
+                                            <td>${kouji.kjMeisyo}</td>
+                                            <td>${kouji.bgnYmd}</td>
+                                            <td>${kouji.responsibility}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${kouji.status == '1'}">
+                                                        <span class="label label-success">完成</span>
+                                                    </c:when>
+                                                    <c:when test="${kouji.status == '0'}">
+                                                        <span class="label label-warning">未完成</span>
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <div class="operation-button">
+                                                    <a class="btn btn-primary btn-sm operation-button-btn" href="/kouji/${kouji.id}"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div><!-- /.tab-pane -->
                             <div class="tab-pane" id="tab_2">
                                 <table class="table table-hover kouji-table">
-                                    <thead><tr>
-                                        <th>弁番号</th>
-                                        <th>設置位置</th>
-                                        <th>弁名称</th>
-                                        <th>型式</th>
-                                        <th>操作</th>
-                                        <th>操作</th>
-                                    </tr></thead>
-                                    <tbody>
-                                    <c:forEach items="${updateValveList}" var="updateValve">
+                                    <thead>
                                         <tr>
-                                            <td>${updateValve.vNo}</td>
-                                            <td>${updateValve.locationName}</td>
-                                            <td>${updateValve.benMeisyo}</td>
-                                            <td>${updateValve.keisiki}</td>
-                                            <td>${updateValve.sousa}</td>
+                                            <th>工事番号</th>
+                                            <th>工事名</th>
+                                            <th>開始日付</th>
+                                            <th>責任者</th>
+                                            <th>状態</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${updatedKoujiList}" var="kouji">
+                                        <tr>
+                                            <td>${kouji.kjNo}</td>
+                                            <td>${kouji.kjMeisyo}</td>
+                                            <td>${kouji.bgnYmd}</td>
+                                            <td>${kouji.responsibility}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${kouji.status == '1'}">
+                                                        <span class="label label-success">完成</span>
+                                                    </c:when>
+                                                    <c:when test="${kouji.status == '0'}">
+                                                        <span class="label label-warning">未完成</span>
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
 
                                             <td>
                                                 <div class="operation-button">
-                                                    <a class="btn btn-primary btn-sm operation-button-btn" href="/item/${updateValve.kikiSysId}"><i class="fa fa-pencil"></i></a>
-                                                    <a class="btn btn-danger btn-sm operation-button-btn" href="/item/${updateValve.kikiSysId}/delete"><i class="fa fa-trash-o"></i></a>
+                                                    <a class="btn btn-primary btn-sm operation-button-btn" href="/kouji/${kouji.id}"><i class="glyphicon glyphicon-pencil"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
-
                                     </c:forEach>
                                     </tbody>
                                 </table>
@@ -232,19 +133,119 @@
                         </div><!-- /.tab-content -->
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">機器点検履歴</h3>
+                        </div>
+                        <div class="panel-body">
 
+                            <div class="row well-sm">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control input-sm" placeholder="履歴から検索" />
+                                </div>
+                            </div>
+
+                            <ul class="timeline">
+
+                                <!-- timeline item -->
+                                <li>
+                                    <!-- timeline icon -->
+                                    <i class="glyphicon glyphicon-check bg-green"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 10 Feb. 2014</span>
+
+                                        <%--<h3 class="timeline-header"><a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案) </h3>--%>
+
+                                        <div class="timeline-body">
+                                            <a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案)
+                                        </div>
+
+                                        <%--<div class='timeline-footer'>--%>
+                                            <%--<a class="btn btn-primary btn-xs">...</a>--%>
+                                        <%--</div>--%>
+                                    </div>
+                                </li>
+                                <li>
+                                    <!-- timeline icon -->
+                                    <i class="glyphicon glyphicon-check bg-green"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 10 Feb. 2014</span>
+
+                                        <div class="timeline-body">
+                                            <a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案)
+                                        </div>
+
+                                        <%--<div class='timeline-footer'>--%>
+                                        <%--<a class="btn btn-primary btn-xs">...</a>--%>
+                                        <%--</div>--%>
+                                    </div>
+                                </li>
+                                <li>
+                                    <!-- timeline icon -->
+                                    <i class="glyphicon glyphicon-floppy-save bg-red"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 10 Feb. 2014</span>
+
+                                        <%--<h3 class="timeline-header"><a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案) </h3>--%>
+
+                                        <div class="timeline-body">
+                                            <a href="#">A</a> 機器番号(機器名称) -> (懸案)
+                                        </div>
+
+                                        <%--<div class='timeline-footer'>--%>
+                                        <%--<a class="btn btn-primary btn-xs">...</a>--%>
+                                        <%--</div>--%>
+                                    </div>
+                                </li>
+                                <li>
+                                    <!-- timeline icon -->
+                                    <i class="glyphicon glyphicon-check bg-green"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 10 Feb. 2014</span>
+
+                                        <%--<h3 class="timeline-header"><a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案) </h3>--%>
+
+                                        <div class="timeline-body">
+                                            <a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案)
+                                        </div>
+
+                                        <%--<div class='timeline-footer'>--%>
+                                        <%--<a class="btn btn-primary btn-xs">...</a>--%>
+                                        <%--</div>--%>
+                                    </div>
+                                </li>
+                                <li>
+                                    <!-- timeline icon -->
+                                    <i class="glyphicon glyphicon-check bg-green"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 10 Feb. 2014</span>
+
+                                        <%--<h3 class="timeline-header"><a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案) </h3>--%>
+
+                                        <div class="timeline-body">
+                                            <a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案)
+                                        </div>
+
+                                        <%--<div class='timeline-footer'>--%>
+                                        <%--<a class="btn btn-primary btn-xs">...</a>--%>
+                                        <%--</div>--%>
+                                    </div>
+                                </li>
+                                <!-- END timeline item -->
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section><!-- /.content -->
-    </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->
 
 <!-- add new calendar event modal -->
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $(".box-panel").click(function(){
-            $(this).next().toggle();
-        });
 
         $(".kouji-table tr").mouseover(function(obj){
             var tr = $(obj.currentTarget)[0];
