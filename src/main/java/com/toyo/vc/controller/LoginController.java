@@ -37,7 +37,7 @@ public class LoginController {
     public String loginByUserid(@RequestParam("userid")String userid,
                                 @RequestParam("password")String password,
                                 HttpSession session){
-        User user = userService.getUserByUserid(userid,password);
+        User user = userService.getUserByUseridAndPassword(userid,password);
         session.setAttribute("imageRoot","http://storage.googleapis.com/valdac/");
         if(user == null){
             return "login";
