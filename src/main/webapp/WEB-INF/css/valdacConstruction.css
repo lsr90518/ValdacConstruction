@@ -344,18 +344,83 @@ Component: timeline
     top: 0;
 }
 
-
+.progress-panel{
+    padding: 0;
+}
+.progress-panel>.panel-body{
+    padding-bottom: 0px;
+    text-align: center;
+}
+.progress-panel > .panel-body > div{
+    margin-bottom: 10px;
+}
 
 .operation-button{
     opacity: 0;
 }
 
 /* book marker right */
+.bookmarkUl{
+
+}
 .currentBookmark{
     border-right: solid 2px #008785;
     border-top: solid 1px #cccccc;
     border-bottom: solid 1px #cccccc;
     box-shadow: 10px 0 15px 1px #eee;
+}
+
+.tenken-select{
+    height: 25px;
+}
+
+/*
+    step component
+*/
+.step-div{
+    padding: 30px;
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+    color:gainsboro;
+    margin: 0 0px 10px 0px;
+}
+
+.first-step-complete{
+    border-top: solid 1px #eeeeee;
+    border-bottom: solid 1px #eeeeee;
+    border-bottom-left-radius: 100px;
+    border-top-left-radius: 100px;
+    border-left: solid 10px #66B487;
+    color:#66B487;
+}
+.middle-step-complete{
+    border-top: solid 1px #eeeeee;
+    border-bottom: solid 1px #eeeeee;
+    color:#66B487;
+}
+.last-step-complete{
+    border-top: solid 1px #eeeeee;
+    border-bottom: solid 1px #eeeeee;
+    border-bottom-right-radius: 100px;
+    border-top-right-radius: 100px;
+    border-right: solid 10px #66B487;
+    color:#66B487;
+}
+
+
+/*
+    dropmenu
+*/
+
+.dropdown-panel{
+    position: absolute;
+    z-index: 1000;
+    width: 600px;
+    display:none;
+    margin-bottom: 0px;
+    box-shadow: 0px 10px 10px 0px #ccc;
+    border-bottom: solid #f56954;
 }
 
 /* Background colors */
@@ -426,6 +491,9 @@ Component: timeline
 }
 .bg-light-green{
     background-color: #DCE29E;
+}
+.bg-middle-green{
+    background-color: #66B487;
 }
 /* Text colors */
 .text-red {

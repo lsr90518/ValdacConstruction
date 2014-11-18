@@ -31,7 +31,7 @@
                     <button type="submit" class="btn btn-default">検索</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">新規工事</a></li>
+                    <li><a href="/kouji/add">新規工事</a></li>
                     <li><a href="#">工事一覧</a></li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

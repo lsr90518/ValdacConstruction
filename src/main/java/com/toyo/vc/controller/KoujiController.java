@@ -28,10 +28,22 @@ public class KoujiController {
         return "/kouji/index";
     }
 
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addKouji(HttpSession session){
+        return "/kouji/addKouji";
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getKoujiById(@PathVariable("id")String id, ModelMap modelMap, HttpSession session){
         Kouji kouji = new Kouji();
         modelMap.addAttribute("kouji",kouji);
         return "/kouji/index";
+    }
+
+    @RequestMapping(value = "/{id}/history", method = RequestMethod.GET)
+    public String getHistoryById(@PathVariable("id")String id, ModelMap modelMap, HttpSession session){
+        Kouji kouji = new Kouji();
+        modelMap.addAttribute("kouji",kouji);
+        return "/kouji/history";
     }
 }

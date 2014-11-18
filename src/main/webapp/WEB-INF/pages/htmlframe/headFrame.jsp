@@ -21,9 +21,9 @@
     <!-- jvectormap -->
     <link href="/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
     <%--<!-- Date Picker -->--%>
-    <%--<link href="/css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />--%>
+    <link href="/css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
     <%--<!-- Daterange picker -->--%>
-    <%--<link href="/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />--%>
+    <link href="/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
     <%--<!-- bootstrap wysihtml5 - text editor -->--%>
     <%--<link href="/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />--%>
     <!-- Theme style -->
@@ -41,4 +41,9 @@
     <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/client.js"></script>
+    <%--<!-- daterangepicker -->--%>
+    <script src="/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <%--<!-- datepicker -->--%>
+    <script src="/js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="/js/plugins/datepicker/locales/bootstrap-datepicker.ja.js" type="text/javascript"></script>
 </head>
