@@ -17,6 +17,13 @@ public class KoujiService {
 
     @Resource
     KoujiMapper koujiMapper;
+    /**工事IDから工事情報を取得*/
+    public Kouji getKoujiById(String id){
+
+        Kouji kouji=koujiMapper.findKoujiById(id);
+        return  kouji;
+    }
+
     /**該ユーザが担当している工事リストを取得*/
     public List<Kouji> getKoujiByResponsibility(String userid){
 

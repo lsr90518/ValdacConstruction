@@ -10,6 +10,9 @@ import java.util.List;
 public interface KoujiMapper {
 
     /**該ユーザが担当している工事リストを取得*/
+    public Kouji findKoujiById(String id);
+
+    /**該ユーザが担当している工事リストを取得*/
     public List<Kouji> findByUserId(String userid);
     public List<Kouji> findByUserIdAndKoujiStatus(Kouji kouji);
     /**該ユーザが担当している最新の工事リストのトップ１０を取得*/
