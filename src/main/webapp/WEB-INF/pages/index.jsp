@@ -39,9 +39,6 @@
                             <li class=""><a href="#tab_2" data-toggle="tab">編集履歴</a></li>
 
                             <div class="box-tools">
-                                <div class="pull-right" style="padding: 0 10px 0 10px">
-                                    <button class="btn btn-sm btn-success">+</button>
-                                </div>
                                 <div class="input-group">
                                     <input type="text" name="table_search" id="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search">
                                     <div class="input-group-btn">
