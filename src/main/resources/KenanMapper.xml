@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.toyo.vc.dao.KenanMapper">
+
+    <select id="findKenanById" parameterType="String" resultType="Kenan">
+        select * from kenan where id=#{id}
+    </select>
+
+    <select id="findKenanByKoujiId" parameterType="String" resultType="Kenan">
+        select * from kenan where koujiId=#{koujiId}
+    </select>
+
+    <select id="findKenanByKikiId" parameterType="String" resultType="Kenan">
+        select * from kenan where kikiId=#{kikiId}
+    </select>
+
+    <insert id="insertKenan" parameterType="Kenan">
+        insert into
+        kenan(koujiId,koujirelationId,kikiId,hakkenDate,taisakuDate,taiouFlg,jisyo,buhin,gensyo,youin,taisaku,hakkenJyokyo,syotiNaiyou,trkDate, updDate)
+        values(
+        #{koujiId},
+        #{koujirelationId},
+        #{kikiId},
+        #{hakkenDate},
+        #{taisakuDate},
+        #{taiouFlg},
+        #{jisyo},
+        #{buhin},
+        #{gensyo},
+        #{youin},
+        #{taisaku},
+        #{hakkenJyokyo},
+        #{syotiNaiyou}
+        #{trkDate},
+        #{updDate}
+        )
+    </insert>
+
+    <update id="updateKenan" parameterType="Kenan">
+        update kenan
+        set koujiId = #{koujiId},
+        koujirelationId = #{koujirelationId},
+        kikiId = #{kikiId},
+        hakkenDate = #{hakkenDate},
+        taisakuDate = #{taisakuDate},
+        taiouFlg = #{taiouFlg},
+        jisyo = #{jisyo},
+        buhin = #{buhin},
+        gensyo = #{gensyo},
+        youin = #{youin},
+        taisaku = #{taisaku},
+        hakkenJyokyo = #{hakkenJyokyo},
+        syotiNaiyou = #{syotiNaiyou},
+        updDate = #{updDate}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKenan" parameterType="Kenan" >
+        DELETE
+        FROM kenan
+        WHERE id=#{id}
+    </delete>
+
+    <select id="getLastInsertId" resultType="int">
+        select id from kenan ORDER BY id DESC limit 1
+    </select>
+
+</mapper>

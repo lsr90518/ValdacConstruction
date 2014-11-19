@@ -2,6 +2,7 @@ package com.toyo.vc.service;
 
 import com.toyo.vc.dao.KoujiMapper;
 import com.toyo.vc.entity.Kouji;
+import com.toyo.vc.entity.TenkenRireki;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -86,19 +87,16 @@ public class KoujiService {
         return kouji;
     }
 
-    public void updateKouji(Kouji kouji){
+    public Kouji updateKouji(Kouji kouji){
         Date date=new Date();
         SimpleDateFormat sdf1=new SimpleDateFormat("yyyy/MM/dd");
         kouji.setUpdDate(sdf1.format(date));
 
         koujiMapper.updateKouji(kouji);
+        return kouji;
     }
 
     public void deleteKouji(Kouji kouji){
-        Date date=new Date();
-        SimpleDateFormat sdf1=new SimpleDateFormat("yyyy/MM/dd");
-        kouji.setUpdDate(sdf1.format(date));
-
         koujiMapper.deleteKouji(kouji);
     }
 }
