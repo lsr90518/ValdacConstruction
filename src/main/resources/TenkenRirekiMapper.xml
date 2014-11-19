@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.toyo.vc.dao.TenkenRirekiMapper">
+
+    <select id="findTenkenRirekiById" parameterType="String" resultType="TenkenRireki">
+        select * from tenkenRireki where id=#{id}
+    </select>
+
+    <select id="findTenkenRirekiByKoujiId" parameterType="String" resultType="TenkenRirekiUtil">
+        select kiki.*,tenkenRireki.*
+        from tenkenRireki
+        LEFT JOIN kiki
+        ON tenkenRireki.kikiId=kiki.kikiId
+        WHERE tenkenRireki.koujiId=#{koujiId}
+    </select>
+
+    <insert id="insertTenkenRireki" parameterType="TenkenRireki">
+        insert into
+        tenkenRireki(koujiId, koujirelationId,kikiId,tenkenDate,tenkenNendo,tenkenRank,tenkennaiyo,tenkenkekka,kanryoFlg,trkDate, updDate)
+        values(
+        #{koujiId},
+        #{koujirelationId},
+        #{kikiId},
+        #{tenkenDate},
+        #{tenkenNendo},
+        #{tenkenRank},
+        #{tenkennaiyo},
+        #{tenkenkekka},
+        #{kanryoFlg},
+        #{trkDate},
+        #{updDate}
+        )
+    </insert>
+
+    <update id="updateTenkenRireki" parameterType="TenkenRireki">
+        update tenkenRireki
+        set koujiId = #{koujiId},
+        koujirelationId = #{koujirelationId},
+        kikiId = #{kikiId},
+        tenkenDate = #{tenkenDate},
+        tenkenNendo = #{tenkenNendo},
+        tenkenRank = #{tenkenRank},
+        tenkennaiyo = #{tenkennaiyo},
+        tenkenkekka = #{tenkenkekka},
+        kanryoFlg = #{kanryoFlg},
+        updDate = #{updDate}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTenkenRireki" parameterType="TenkenRireki" >
+        DELETE
+        FROM tenkenRireki
+        WHERE id=#{id}
+    </delete>
+
+    <select id="getLastInsertId" resultType="int">
+        select id from tenkenRireki ORDER BY id DESC limit 1
+    </select>
+
+</mapper>
