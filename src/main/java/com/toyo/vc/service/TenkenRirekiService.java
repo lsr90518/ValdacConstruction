@@ -40,11 +40,12 @@ public class TenkenRirekiService {
         return tenkenRireki;
     }
 
-    public void updateTenkenRireki(TenkenRireki tenkenRireki){
+    public TenkenRireki updateTenkenRireki(TenkenRireki tenkenRireki){
         Date date=new Date();
         SimpleDateFormat sdf1=new SimpleDateFormat("yyyy/MM/dd");
         tenkenRireki.setUpdDate(sdf1.format(date));
         tenkenRirekiMapper.updateTenkenRireki(tenkenRireki);
+        return tenkenRireki;
     }
 
     public void deleteTenkenRireki(TenkenRireki tenkenRireki){
