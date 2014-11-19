@@ -1,7 +1,6 @@
 package com.toyo.vc.dao;
 
-import com.ValdacBeta.entity.Master;
-import com.ValdacBeta.entity.User;
+import com.toyo.vc.entity.Master;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

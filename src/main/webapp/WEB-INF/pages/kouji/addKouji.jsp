@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <form id="koujiForm" action="/kouji/add" method="post">
+                        <form id="KoujiForm" name="KoujiForm" action="/kouji/add" method="post">
                             <div class="row form-group">
                                 <div class="col-md-3">
                                     <input type="text" class="form-control" name="kjNo" value="" placeholder="工事番号"/>
@@ -62,7 +62,7 @@
 
                             <div class="row form-group">
                                 <div class="col-md-3">
-                                    <select class="form-control" name="responsibility">
+                                    <select class="form-control" name="person" id="person">
                                         <option>1</option>
                                         <option>zui</option>
                                     </select>
@@ -130,10 +130,11 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <select name="kjKbn" class="form-control">
-                                        <option>定期検査</option>
-                                        <option>非定期検査</option>
-                                        <option>その他</option>
+                                    <select name="kjKbn" id="kjKbn" class="form-control">
+                                        <option>--工事区分--</option>
+                                        <%--<option>定期検査</option>--%>
+                                        <%--<option>定期自主検査</option>--%>
+                                        <%--<option>その他</option>--%>
                                     </select>
                                 </div>
                             </div>
@@ -157,7 +158,7 @@
                             <div class="row form-group">
                                 <div class="col-md-10">
                                     <input type="submit" class="btn btn-success" value="保存"/>
-                                    <input type="button" class="btn btn-default" onclick="koujiForm.clear();return false" value="リセット"/>
+                                    <input type="button" class="btn btn-default" onclick="KoujiForm.clear();return false" value="リセット"/>
                                 </div>
                             </div>
                         </form>
@@ -172,6 +173,18 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
+
+        //工事区分 Master を呼ぶ
+        $.post("/master/getMasterByTypeJson",{"type":'工事区分'},function(data){
+            var masters = JSON.parse(data);
+            $('#kjKbn').html("");
+            var tmpHTML = "<option>--工事区分--</option>";
+            for(var i = 0 ; i < masters.length ; i++){
+                tmpHTML = tmpHTML+"<option>" + masters[i].name + "</option>";
+            }
+            $('#kjKbn').html(tmpHTML);
+        });
+
         //The Calender
         $('#sandbox-container .input-daterange').datepicker({
             format: 'yyyy/mm/dd',
@@ -245,6 +258,7 @@
         });
 
     });
+
 
 </script>
 </body>

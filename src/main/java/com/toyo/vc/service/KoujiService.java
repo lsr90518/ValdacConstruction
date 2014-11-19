@@ -34,7 +34,7 @@ public class KoujiService {
     /**該ユーザが担当している工事リスト+工事状態　取得*/
     public List<Kouji> getKoujiByResponsibilityAndStatus(String userid,String status){
         Kouji koujiTemp=new Kouji();
-        koujiTemp.setResponsiblity(userid);
+        koujiTemp.setPerson(userid);
         koujiTemp.setStatus(status);
         List<Kouji> kouji=koujiMapper.findByUserIdAndKoujiStatus(koujiTemp);
         return  kouji;
@@ -50,7 +50,7 @@ public class KoujiService {
     /**該ユーザが担当している最新の工事リストのトップ１０＋工事状態　を取得*/
     public List<Kouji> getLastedTenKoujiByResponsibilityAndKoujiStatus(String userid,String status){
         Kouji koujiTemp=new Kouji();
-        koujiTemp.setResponsiblity(userid);
+        koujiTemp.setPerson(userid);
         koujiTemp.setStatus(status);
         List<Kouji> kouji=koujiMapper.findLastedTenKoujiByResponsibilityAndKoujiStatus(koujiTemp);
         return  kouji;
@@ -66,7 +66,7 @@ public class KoujiService {
     /**該ユーザが最近更新した工事リストのトップ１０+工事状態　を取得*/
     public List<Kouji> getUpdateTenKoujiByResponsibilityAndKoujiStatus(String userid,String status){
         Kouji koujiTemp=new Kouji();
-        koujiTemp.setResponsiblity(userid);
+        koujiTemp.setPerson(userid);
         koujiTemp.setStatus(status);
         List<Kouji> kouji=koujiMapper.findUpdateTenKoujiByResponsibilityAndKoujiStatus(koujiTemp);
         return  kouji;

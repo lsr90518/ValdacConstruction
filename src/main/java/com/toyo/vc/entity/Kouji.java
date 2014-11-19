@@ -17,7 +17,7 @@ public class Kouji {
     public String gyosyaRyakuA;
     public String location;
     public String status;
-    public String responsibility;
+    public String person;
     public String trkDate;
     public String updDate;
 
@@ -34,7 +34,7 @@ public class Kouji {
                 syukan+" "+
                 gyosyaRyakuA+" "+
                 location+" "+
-                responsibility+" ";
+                person+" ";
         return text;
     }
     public int getTrkDateInt(){
@@ -102,9 +102,13 @@ public class Kouji {
 
     public void setStatus(String status){this.status=status;}
 
-    public String getResponsibility(){return  responsibility;}
+    public String getPerson() {
+        return person;
+    }
 
-    public void setResponsiblity(String responsibility){this.responsibility=responsibility;}
+    public void setPerson(String person) {
+        this.person = person;
+    }
 
     public String getTrkDate(){return trkDate;}
 

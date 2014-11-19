@@ -1,7 +1,7 @@
 package com.toyo.vc.service;
 
-import com.ValdacBeta.dao.MasterMapper;
-import com.ValdacBeta.entity.Master;
+import com.toyo.vc.dao.MasterMapper;
+import com.toyo.vc.entity.Master;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
