@@ -26,14 +26,14 @@ public class KoujiService {
     }
 
     /**該ユーザが担当している工事リストを取得*/
-    public List<Kouji> getKoujiByResponsibility(String userid){
+    public List<Kouji> getKoujiByPerson(String userid){
 
         List<Kouji> kouji=koujiMapper.findByUserId(userid);
         return  kouji;
     }
 
     /**該ユーザが担当している工事リスト+工事状態　取得*/
-    public List<Kouji> getKoujiByResponsibilityAndStatus(String userid,String status){
+    public List<Kouji> getKoujiByPersonAndStatus(String userid,String status){
         Kouji koujiTemp=new Kouji();
         koujiTemp.setPerson(userid);
         koujiTemp.setStatus(status);
@@ -42,34 +42,34 @@ public class KoujiService {
     }
 
     /**該ユーザが担当している最新の工事リストのトップ１０を取得*/
-    public List<Kouji> getLastedTenKoujiByResponsibility(String userid){
+    public List<Kouji> getLastedTenKoujiByPerson(String userid){
 
-        List<Kouji> kouji=koujiMapper.findLastedTenKoujiByResponsibility(userid);
+        List<Kouji> kouji=koujiMapper.findLastedTenKoujiByperson(userid);
         return  kouji;
     }
 
     /**該ユーザが担当している最新の工事リストのトップ１０＋工事状態　を取得*/
-    public List<Kouji> getLastedTenKoujiByResponsibilityAndKoujiStatus(String userid,String status){
+    public List<Kouji> getLastedTenKoujiByPersonAndKoujiStatus(String userid,String status){
         Kouji koujiTemp=new Kouji();
         koujiTemp.setPerson(userid);
         koujiTemp.setStatus(status);
-        List<Kouji> kouji=koujiMapper.findLastedTenKoujiByResponsibilityAndKoujiStatus(koujiTemp);
+        List<Kouji> kouji=koujiMapper.findLastedTenKoujiBypersonAndKoujiStatus(koujiTemp);
         return  kouji;
     }
 
     /**該ユーザが最近更新した工事リストのトップ１０を取得*/
-    public List<Kouji> getUpdateTenKoujiByResponsibility(String userid){
+    public List<Kouji> getUpdateTenKoujiByPerson(String userid){
 
-        List<Kouji> kouji=koujiMapper.findUpdateTenKoujiByResponsibility(userid);
+        List<Kouji> kouji=koujiMapper.findUpdateTenKoujiByperson(userid);
         return  kouji;
     }
 
     /**該ユーザが最近更新した工事リストのトップ１０+工事状態　を取得*/
-    public List<Kouji> getUpdateTenKoujiByResponsibilityAndKoujiStatus(String userid,String status){
+    public List<Kouji> getUpdateTenKoujiByPersonAndKoujiStatus(String userid,String status){
         Kouji koujiTemp=new Kouji();
         koujiTemp.setPerson(userid);
         koujiTemp.setStatus(status);
-        List<Kouji> kouji=koujiMapper.findUpdateTenKoujiByResponsibilityAndKoujiStatus(koujiTemp);
+        List<Kouji> kouji=koujiMapper.findUpdateTenKoujiBypersonAndKoujiStatus(koujiTemp);
         return  kouji;
     }
 

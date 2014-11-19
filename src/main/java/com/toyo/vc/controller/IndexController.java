@@ -32,11 +32,11 @@ public class IndexController {
             return "login";
         } else {
             if(user.getKengen().equals("6")){
-                modelMap.addAttribute("lastedKoujiList",koujiService.getLastedTenKoujiByResponsibility("zui"));
-                modelMap.addAttribute("updatedKoujiList",koujiService.getUpdateTenKoujiByResponsibility("zui"));
+                modelMap.addAttribute("lastedKoujiList",koujiService.getLastedTenKoujiByPerson("zui"));
+                modelMap.addAttribute("updatedKoujiList",koujiService.getUpdateTenKoujiByPerson("zui"));
             } else {
-                modelMap.addAttribute("lastedKoujiList",koujiService.getLastedTenKoujiByResponsibility(user.getUserid()));
-                modelMap.addAttribute("updatedKoujiList",koujiService.getUpdateTenKoujiByResponsibility(user.getUserid()));
+                modelMap.addAttribute("lastedKoujiList",koujiService.getLastedTenKoujiByPerson(user.getUserid()));
+                modelMap.addAttribute("updatedKoujiList",koujiService.getUpdateTenKoujiByPerson(user.getUserid()));
             }
             return "index";
         }
