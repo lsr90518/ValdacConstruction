@@ -45,34 +45,43 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-hover table-striped">
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <th>弁番号</th>
-                        <th>弁名称</th>
-                        <th>形式</th>
-                        <th>操作</th>
-                        <th>クラス</th>
-                        <th>呼び径</th>
-                        <th>圧力</th>
-                        <th>流体</th>
-                    </tr>
+                <div class="panel panel-default">
+                    <div class="panel-body table-panel">
+                        <table class="table table-hover table-striped select-table">
+                            <tr>
+                                <th><input type="checkbox" class="headCheckbox" onclick="selectAllItem()"></th>
+                                <th>弁番号</th>
+                                <th>弁名称</th>
+                                <th>形式</th>
+                                <th>操作</th>
+                                <th>クラス</th>
+                                <th>呼び径</th>
+                                <th>圧力</th>
+                                <th>流体</th>
+                            </tr>
 
-                <c:forEach items="${valveList}" var="valve">
-                    <tr>
-                        <td><input type="checkbox" value="${valve.kikiSysId}"></td>
-                        <td>${valve.vNo}</td>
-                        <td>${valve.benMeisyo}</td>
-                        <td>${valve.keisiki}</td>
-                        <td>${valve.sousa}</td>
-                        <td>${valve.classType}</td>
-                        <td>${valve.yobikei}</td>
-                        <td>${valve.aturyokuMax}${valve.tani}</td>
-                        <td>${valve.ryutai}</td>
-                    </tr>
-                    ${valve.kikiSysId}
-                </c:forEach>
-                </table>
+                        <c:forEach items="${valveList}" var="valve">
+                            <tr class="valve-item">
+                                <td><input type="checkbox" class="checkbox" style="opacity: 0" value="${valve.kikiSysId}"></td>
+                                <td>${valve.vNo}</td>
+                                <td>${valve.benMeisyo}</td>
+                                <td>${valve.keisiki}</td>
+                                <td>${valve.sousa}</td>
+                                <td>${valve.classType}</td>
+                                <td>${valve.yobikei}</td>
+                                <td>${valve.aturyokuMax}${valve.tani}</td>
+                                <td>${valve.ryutai}</td>
+                            </tr>
+                        </c:forEach>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <form action="/kouji/${kouji.id}/valve" id="valveListForm" method="post">
+                            <input type="hidden" name="idList" id="idList" value="" />
+                            <button class="btn btn-success btn-sm" onclick="submitForm()">確定</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <!-- information tab -->
         </div>
@@ -80,9 +89,62 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-
+        $('.valve-item').mouseup(function(obj){
+            var tr = obj.currentTarget;
+            var selected = $(tr).find('.checkbox');
+            var checkbox = selected[0];
+            if($(checkbox).prop("checked") == true){
+                $(checkbox).prop('checked', false);
+                $(tr).removeClass("bg-light-blue-gradient");
+            } else {
+                $(checkbox).prop('checked', true);
+                $(tr).addClass("bg-light-blue-gradient");
+            }
+        });
     });
 
+    function selectAllItem(){
+        if(!$('.headCheckbox').prop('checked')){
+            $('.select-table').find('.checkbox').each(function(){
+                var checkbox = $(this)[0];
+                if($(checkbox).prop('checked')== true) {
+                    $(checkbox).prop('checked', false);
+                }
+            });
+            $('.select-table').find('.valve-item').each(function(){
+                var tr = $(this)[0];
+                if($(tr).hasClass('bg-light-blue-gradient')){
+                    $(tr).removeClass("bg-light-blue-gradient");
+                }
+            });
+        } else {
+            $('.select-table').find('.checkbox').each(function(){
+                var checkbox = $(this)[0];
+                if($(checkbox).prop('checked')== true) {
+                }
+                else {
+                    $(checkbox).prop('checked', true);
+                }
+            });
+            $('.select-table').find('.valve-item').each(function(){
+                var tr = $(this)[0];
+                if($(tr).hasClass('bg-light-blue-gradient')){
+                }
+                else {
+                    $(tr).addClass("bg-light-blue-gradient");
+                }
+            });
+        }
+    }
+
+    function submitForm(){
+        var idList = "";
+        $('.checkbox:checked').each(function(){
+            idList = idList + $(this)[0].value + ',';
+        });
+        $('#idList').val(idList);
+//        return false;
+    }
 
 </script>
 </body>
