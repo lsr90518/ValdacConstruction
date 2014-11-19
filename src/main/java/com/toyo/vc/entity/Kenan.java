@@ -95,6 +95,8 @@ public class Kenan {
     public String getHakkenJyokyo(){return  hakkenJyokyo;}
     public void setHakkenJyokyo(String hakkenJyokyo){this.hakkenJyokyo=hakkenJyokyo;}
 
+    public String getSyotiNaiyou(){return syotiNaiyou;}
+    public void setSyotiNaiyou(String syotiNaiyou){this.syotiNaiyou=syotiNaiyou;}
 
     public String getTrkDate(){return  trkDate;}
     public void setTrkDate(String trkDate){this.trkDate=trkDate;}
