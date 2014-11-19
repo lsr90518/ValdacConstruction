@@ -66,7 +66,7 @@
                                             <td>${kouji.kjNo}</td>
                                             <td>${kouji.kjMeisyo}</td>
                                             <td>${kouji.bgnYmd}</td>
-                                            <td>${kouji.responsibility}</td>
+                                            <td>${kouji.person}</td>
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${kouji.status == '1'}">
@@ -105,7 +105,7 @@
                                             <td>${kouji.kjNo}</td>
                                             <td>${kouji.kjMeisyo}</td>
                                             <td>${kouji.bgnYmd}</td>
-                                            <td>${kouji.responsibility}</td>
+                                            <td>${kouji.person}</td>
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${kouji.status == '1'}">

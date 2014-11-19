@@ -6,16 +6,16 @@
         select * from kouji where id=#{id}
     </select>
 
-    <select id="findByUserId" parameterType="String" resultType="Kouji">
+    <select id="findKoujiByperson" parameterType="String" resultType="Kouji">
         select * from kouji
         <where>
             <if test="value.length>0">
-                person = #{userid}
+                person = #{username}
             </if>
         </where>
     </select>
 
-    <select id="findByUserIdAndKoujiStatus" parameterType="Kouji" resultType="Kouji">
+    <select id="findByPersonAndKoujiStatus" parameterType="Kouji" resultType="Kouji">
         select * from kouji
         <where>
             <if test="person.length()>0">
@@ -31,7 +31,7 @@
         select * from kouji
         <where>
             <if test="value.length>0">
-                person=#{userid}
+                person=#{username}
             </if>
         </where>
         ORDER BY bgnYmd DESC limit 10
@@ -54,7 +54,7 @@
         select * from kouji
         <where>
             <if test="value.length>0">
-                person=#{userid}
+                person=#{username}
             </if>
         </where>
         ORDER BY updDate DESC limit 10
