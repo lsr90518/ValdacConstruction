@@ -32,6 +32,7 @@
         <hr/>
 
         <section class="content">
+
             <div class="row">
                 <div class="col-md-10">
                     <div class="panel panel-default">
@@ -73,19 +74,177 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-10">
-                                    <input type="submit" class="btn btn-success" value="保存"/>
+                                    <input type="submit" class="btn btn-success" value="変更"/>
                                     <input type="button" class="btn btn-default" value="リセット"/>
                                 </div>
                             </div>
-                        </div>
+                        </div><!-- information penal -->
                     </div>
+
+                        <div class="panel panel-default progress-panel">
+                            <div class="panel-body">
+                                <div class="row progress-data-div">
+                                    <div class="col-md-4">
+                                        <i class="glyphicon glyphicon-inbox"> 未完成:80</i>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="glyphicon glyphicon-gift"> 完成: 20</i>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <i class="glyphicon glyphicon-saved"> 全部: 100</i>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-middle-green progress-bar-striped active" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+                                        20%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="table table-hover kiki-table">
+                                <tr class="bg-gray">
+                                    <th>弁番号</th>
+                                    <th>弁名称</th>
+                                    <th>機器番号</th>
+                                    <th>機器名称</th>
+                                    <th>点検結果</th>
+                                    <th>懸案</th>
+                                </tr>
+                                <tr>
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                    <td>
+                                        <input type="button" class="btn btn-sm btn-danger" value="懸案"/>
+                                    </td>
+                                </tr>
+                                <tr class="success">
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                    <td>
+                                        <input type="button" class="btn btn-sm btn-danger" value="懸案"/>
+                                    </td>
+                                </tr>
+                                <tr class="success">
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                    <td>
+                                        <input type="button" class="btn btn-sm btn-danger" value="懸案"/>
+                                    </td>
+                                </tr>
+                                <tr class="success">
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                    <td>
+                                        <input type="button" class="btn btn-sm btn-danger" value="懸案"/>
+                                    </td>
+                                </tr>
+                                <tr class="success">
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                    <td>
+                                        <input type="button" class="btn btn-sm btn-danger" value="懸案"/>
+                                    </td>
+                                </tr>
+                                <tr class="success">
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                </tr>
+                                <tr>
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                </tr>
+                                <tr>
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                </tr>
+                                <tr>
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                </tr>
+                                <tr>
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                </tr>
+                                <tr>
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                </tr>
+                                <tr>
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                </tr>
+                                <tr>
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td><select class="form-control tenken-select">                                             <option>A</option>                                         </select></td>
+                                </tr>
+                                <tr>
+                                    <td>弁番号</td>
+                                    <td>弁名称</td>
+                                    <td>機器番号</td>
+                                    <td>機器名称</td>
+                                    <td>
+                                        <select class="form-control tenken-select">
+                                            <option></option>
+                                            <option>A</option>
+                                            <option>B</option>
+                                            <option>C</option>
+                                            <option>D</option>
+                                            <option>E</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="button" class="btn btn-sm btn-danger" value="懸案"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
                 </div><!-- information tab -->
                 <div class="col-md-2">
                     <div class="row">
                         <div class="col-md-12">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li role="presentation" class="currentBookmark"><a href="#">情報</a></li>
-                                <li role="presentation"><a href="#">履歴</a></li>
+                            <ul class="nav nav-pills nav-stacked bookmarkUl">
+                                <li role="presentation" class="currentBookmark"><a href="/kouji/${kouji.id}">情報</a></li>
+                                <li role="presentation"><a href="/kouji/${kouji.id}/history">履歴</a></li>
                             </ul>
                         </div>
                     </div>

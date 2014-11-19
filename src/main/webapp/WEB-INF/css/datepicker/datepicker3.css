@@ -360,7 +360,7 @@ fieldset[disabled] .datepicker table tr td.range.today.disabled:hover.active {
 .datepicker table tr td.selected.disabled,
 .datepicker table tr td.selected.disabled:hover {
   color: #ffffff;
-  background: rgba(0,0,0,0.2);
+  background: #008785;
   border-color: #555555;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
@@ -495,7 +495,7 @@ fieldset[disabled] .datepicker table tr td.selected.disabled:hover.active {
 .open .dropdown-toggle.datepicker table tr td.active.disabled,
 .open .dropdown-toggle.datepicker table tr td.active.disabled:hover {
   color: #ffffff;
-  background: rgba(0,0,0,0.5);
+  background: #285e8e;
   border-color: #285e8e;
 }
 .datepicker table tr td.active:active,
