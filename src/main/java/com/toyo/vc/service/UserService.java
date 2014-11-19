@@ -5,6 +5,7 @@ import com.toyo.vc.entity.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by zhangrui on 14/11/14.
@@ -27,5 +28,10 @@ public class UserService {
         } else {
             return null;
         }
+    }
+
+    public List<String> getUserByKengen(String kengen){
+        List<String> username=userMapper.findUserByKengen(kengen);
+        return  username;
     }
 }
