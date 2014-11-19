@@ -13,14 +13,14 @@ public interface KoujiMapper {
     public Kouji findKoujiById(String id);
 
     /**該ユーザが担当している工事リストを取得*/
-    public List<Kouji> findByUserId(String userid);
-    public List<Kouji> findByUserIdAndKoujiStatus(Kouji kouji);
+    public List<Kouji> findKoujiByperson(String username);
+    public List<Kouji> findByPersonAndKoujiStatus(Kouji kouji);
     /**該ユーザが担当している最新の工事リストのトップ１０を取得*/
-    public List<Kouji> findLastedTenKoujiByperson(String userid);
+    public List<Kouji> findLastedTenKoujiByperson(String username);
     public List<Kouji> findLastedTenKoujiBypersonAndKoujiStatus(Kouji kouji);
 
     /**該ユーザが最近更新した工事リストのトップ１０を取得*/
-    public List<Kouji> findUpdateTenKoujiByperson(String userid);
+    public List<Kouji> findUpdateTenKoujiByperson(String username);
     public List<Kouji> findUpdateTenKoujiBypersonAndKoujiStatus(Kouji kouji);
 
     /**新規工事をkoujiテーブルに追加する*/

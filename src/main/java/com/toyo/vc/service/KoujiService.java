@@ -2,7 +2,6 @@ package com.toyo.vc.service;
 
 import com.toyo.vc.dao.KoujiMapper;
 import com.toyo.vc.entity.Kouji;
-import com.toyo.vc.entity.TenkenRireki;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,48 +25,48 @@ public class KoujiService {
     }
 
     /**該ユーザが担当している工事リストを取得*/
-    public List<Kouji> getKoujiByPerson(String userid){
+    public List<Kouji> getKoujiByPerson(String username){
 
-        List<Kouji> kouji=koujiMapper.findByUserId(userid);
+        List<Kouji> kouji=koujiMapper.findKoujiByperson(username);
         return  kouji;
     }
 
     /**該ユーザが担当している工事リスト+工事状態　取得*/
-    public List<Kouji> getKoujiByPersonAndStatus(String userid,String status){
+    public List<Kouji> getKoujiByPersonAndStatus(String username,String status){
         Kouji koujiTemp=new Kouji();
-        koujiTemp.setPerson(userid);
+        koujiTemp.setPerson(username);
         koujiTemp.setStatus(status);
-        List<Kouji> kouji=koujiMapper.findByUserIdAndKoujiStatus(koujiTemp);
+        List<Kouji> kouji=koujiMapper.findByPersonAndKoujiStatus(koujiTemp);
         return  kouji;
     }
 
     /**該ユーザが担当している最新の工事リストのトップ１０を取得*/
-    public List<Kouji> getLastedTenKoujiByPerson(String userid){
+    public List<Kouji> getLastedTenKoujiByPerson(String username){
 
-        List<Kouji> kouji=koujiMapper.findLastedTenKoujiByperson(userid);
+        List<Kouji> kouji=koujiMapper.findLastedTenKoujiByperson(username);
         return  kouji;
     }
 
     /**該ユーザが担当している最新の工事リストのトップ１０＋工事状態　を取得*/
-    public List<Kouji> getLastedTenKoujiByPersonAndKoujiStatus(String userid,String status){
+    public List<Kouji> getLastedTenKoujiByPersonAndKoujiStatus(String username,String status){
         Kouji koujiTemp=new Kouji();
-        koujiTemp.setPerson(userid);
+        koujiTemp.setPerson(username);
         koujiTemp.setStatus(status);
         List<Kouji> kouji=koujiMapper.findLastedTenKoujiBypersonAndKoujiStatus(koujiTemp);
         return  kouji;
     }
 
     /**該ユーザが最近更新した工事リストのトップ１０を取得*/
-    public List<Kouji> getUpdateTenKoujiByPerson(String userid){
+    public List<Kouji> getUpdateTenKoujiByPerson(String username){
 
-        List<Kouji> kouji=koujiMapper.findUpdateTenKoujiByperson(userid);
+        List<Kouji> kouji=koujiMapper.findUpdateTenKoujiByperson(username);
         return  kouji;
     }
 
     /**該ユーザが最近更新した工事リストのトップ１０+工事状態　を取得*/
-    public List<Kouji> getUpdateTenKoujiByPersonAndKoujiStatus(String userid,String status){
+    public List<Kouji> getUpdateTenKoujiByPersonAndKoujiStatus(String username,String status){
         Kouji koujiTemp=new Kouji();
-        koujiTemp.setPerson(userid);
+        koujiTemp.setPerson(username);
         koujiTemp.setStatus(status);
         List<Kouji> kouji=koujiMapper.findUpdateTenKoujiBypersonAndKoujiStatus(koujiTemp);
         return  kouji;
