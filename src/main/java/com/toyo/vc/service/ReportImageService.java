@@ -48,7 +48,7 @@ public class ReportImageService {
         Gson gsonvalves = new Gson();
         System.out.println(gsonvalves.toJson(temReportImages));
 
-        if((temReportImages !=null)){
+        if((temReportImages.size()>0)){
             System.out.println("not null");
             reportImage.setPage((reportImageMapper.getLastPageByKoujiId(koujiId))+1);
         }else{

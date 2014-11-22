@@ -1,10 +1,7 @@
 package com.toyo.vc.service;
 
 import com.toyo.vc.dao.KenanMapper;
-import com.toyo.vc.dao.TenkenRirekiMapper;
 import com.toyo.vc.entity.Kenan;
-import com.toyo.vc.entity.TenkenRireki;
-import com.toyo.vc.entity.TenkenRirekiUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
