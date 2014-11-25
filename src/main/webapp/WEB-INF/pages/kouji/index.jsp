@@ -244,6 +244,7 @@
                         <div class="col-md-12">
                             <ul class="nav nav-pills nav-stacked bookmarkUl">
                                 <li role="presentation" class="currentBookmark"><a href="/kouji/${kouji.id}">情報</a></li>
+                                <li role="presentation" ><a href="/kouji/${kouji.id}/instruct">点検指示</a></li>
                                 <li role="presentation"><a href="/kouji/${kouji.id}/history">履歴</a></li>
                             </ul>
                         </div>

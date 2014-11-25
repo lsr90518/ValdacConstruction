@@ -2,6 +2,7 @@ package com.toyo.vc.controller;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.toyo.vc.dto.KoujiForm;
+import com.toyo.vc.dto.ValveKikiSelectUtil;
 import com.toyo.vc.entity.Kiki;
 import com.toyo.vc.entity.Kouji;
 import com.toyo.vc.entity.Koujirelation;
@@ -95,5 +96,23 @@ public class KoujiController {
         modelMap.addAttribute("kouji",kouji);
         modelMap.addAttribute("valveList",valves);
         return "/kouji/addKiki";
+    }
+
+    @RequestMapping(value = "/{id}/saveValveKikiRelation", method = RequestMethod.GET)
+    public String saveValveKikiRelation(@PathVariable("id")String id,
+                                        HttpSession session){
+        //getFromSession
+        List<ValveKikiSelectUtil> valveKikiSelectUtilList = (List<ValveKikiSelectUtil>) session.getAttribute(id);
+        for (int i = 0; i < valveKikiSelectUtilList.size(); i++) {
+            if(valveKikiSelectUtilList.get(i).getStatus().equals("active")) {
+                Koujirelation koujirelation = new Koujirelation();
+                koujirelation.setKoujiid(Integer.valueOf(id));
+                koujirelation.setKikisysid(Integer.valueOf(valveKikiSelectUtilList.get(i).getKikiSysId()));
+                koujirelation.setKikiid(valveKikiSelectUtilList.get(i).getKiki().getKikiId());
+                koujirelationService.addKoujirelation(koujirelation);
+            }
+        }
+
+        return "redirect:/kouji/"+id;
     }
 }
