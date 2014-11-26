@@ -30,6 +30,12 @@ public class KoujirelationService {
         return koujirelation;
     }
 
+    /**工事関連データを所得する*/
+    public List<Koujirelation> getAllKoujirelationByKoujiid(String id){
+        List<Koujirelation> koujirelations=koujirelationMapper.findAllKoujirelationByKoujiid(id);
+        return koujirelations;
+    }
+
     public List<Valve> getKikisysListByKoujiid(String koujiid){
          List<Valve> valves=koujirelationMapper.findKikisysListByKoujiid(koujiid);
         return valves;
