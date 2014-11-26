@@ -519,6 +519,14 @@ Component: timeline
     padding:0px 10px 0px 0px;
 }
 
+.input-success{
+    border: solid 1px green;
+}
+.pagination{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 /* Background colors */
 .bg-red,
 .bg-yellow,

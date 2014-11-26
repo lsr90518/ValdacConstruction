@@ -1,6 +1,5 @@
 package com.toyo.vc.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.toyo.vc.dto.KoujiForm;
 import com.toyo.vc.dto.ValveKikiSelectUtil;
 import com.toyo.vc.entity.*;
@@ -48,7 +47,7 @@ public class KoujiController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addKoujiByForm(@ModelAttribute("KoujiForm")KoujiForm koujiForm, ModelMap modelMap){
-        koujiForm.setStatus("0");
+        koujiForm.setStatus("未完成");
         Kouji kouji = koujiService.addKouji(koujiForm);
         List<Valve> valveList = itemService.getItemByLocationName(kouji.getLocation());
         modelMap.addAttribute("kouji",kouji);
@@ -57,8 +56,18 @@ public class KoujiController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String getKoujiById(@PathVariable("id")String id, ModelMap modelMap){
+    public String getKoujiById(@PathVariable("id")String id, ModelMap modelMap,HttpSession session){
         Kouji kouji = koujiService.getKoujiById(id);
+        List<TenkenRirekiUtil> tenkenRirekiUtilList = tenkenRirekiService.getTenkenRirekiByKoujiId(id);
+
+        for (int i = 0; i < tenkenRirekiUtilList.size(); i++) {
+            Koujirelation koujirelation = koujirelationService.getKoujirelationById(tenkenRirekiUtilList.get(i).getKoujirelationId() + "");
+            Valve valve = itemService.getKikisysByKikisysId(koujirelation.getKikisysid() + "");
+            tenkenRirekiUtilList.get(i).setValve(valve);
+        }
+
+        //make cache
+        session.setAttribute("tenkenRirekiUtilList",tenkenRirekiUtilList);
 
         modelMap.addAttribute("kouji", kouji);
         return "/kouji/index";
@@ -127,8 +136,21 @@ public class KoujiController {
     public String saveResult(@PathVariable("id")String koujiId,
                              HttpSession session,
                              ModelMap modelMap){
+        List<Koujirelation> koujirelationList = koujirelationService.getAllKoujirelationByKoujiid(koujiId);
+        for (int i = 0; i < koujirelationList.size(); i++) {
+            if(koujirelationList.get(i).getKikiid() > 0) {
+                TenkenRireki tenkenRireki = new TenkenRireki();
+                tenkenRireki.setKoujiId(Integer.valueOf(koujiId));
+                tenkenRireki.setKikiId(koujirelationList.get(i).getKikiid());
+                tenkenRireki.setKoujirelationId(koujirelationList.get(i).getId());
+                tenkenRireki.setTenkenkekka("");
+                tenkenRireki.setTenkenRank("");
+                tenkenRireki.setTenkennaiyo("");
 
-//        tenkenRirekiService.addTenkenRireki();
+                tenkenRirekiService.addTenkenRireki(tenkenRireki);
+            }
+        }
+        session.removeAttribute(koujiId);
 
         return "redirect:/kouji/"+koujiId;
     }
