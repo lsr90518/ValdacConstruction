@@ -3,13 +3,11 @@ package com.toyo.vc.controller;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.toyo.vc.dto.KoujiForm;
 import com.toyo.vc.dto.ValveKikiSelectUtil;
-import com.toyo.vc.entity.Kiki;
-import com.toyo.vc.entity.Kouji;
-import com.toyo.vc.entity.Koujirelation;
-import com.toyo.vc.entity.Valve;
+import com.toyo.vc.entity.*;
 import com.toyo.vc.service.ItemService;
 import com.toyo.vc.service.KoujiService;
 import com.toyo.vc.service.KoujirelationService;
+import com.toyo.vc.service.TenkenRirekiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,6 +31,8 @@ public class KoujiController {
     ItemService itemService;
     @Autowired
     KoujirelationService koujirelationService;
+    @Autowired
+    TenkenRirekiService tenkenRirekiService;
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -58,8 +58,9 @@ public class KoujiController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getKoujiById(@PathVariable("id")String id, ModelMap modelMap){
-        Kouji kouji = new Kouji();
-        modelMap.addAttribute("kouji",kouji);
+        Kouji kouji = koujiService.getKoujiById(id);
+
+        modelMap.addAttribute("kouji", kouji);
         return "/kouji/index";
     }
 
@@ -100,7 +101,8 @@ public class KoujiController {
 
     @RequestMapping(value = "/{id}/saveValveKikiRelation", method = RequestMethod.GET)
     public String saveValveKikiRelation(@PathVariable("id")String id,
-                                        HttpSession session){
+                                        HttpSession session,
+                                        ModelMap modelMap){
         //getFromSession
         List<ValveKikiSelectUtil> valveKikiSelectUtilList = (List<ValveKikiSelectUtil>) session.getAttribute(id);
         for (int i = 0; i < valveKikiSelectUtilList.size(); i++) {
@@ -112,7 +114,22 @@ public class KoujiController {
                 koujirelationService.addKoujirelation(koujirelation);
             }
         }
+        Kouji kouji = koujiService.getKoujiById(id);
+        modelMap.addAttribute("kouji",kouji);
+        List<Valve> valveList = koujirelationService.getKikisysListByKoujiid(id);
+        modelMap.addAttribute("valveList",valveList);
 
-        return "redirect:/kouji/"+id;
+
+        return "kouji/addResult";
+    }
+
+    @RequestMapping(value = "/{id}/saveResult", method = RequestMethod.GET)
+    public String saveResult(@PathVariable("id")String koujiId,
+                             HttpSession session,
+                             ModelMap modelMap){
+
+//        tenkenRirekiService.addTenkenRireki();
+
+        return "redirect:/kouji/"+koujiId;
     }
 }

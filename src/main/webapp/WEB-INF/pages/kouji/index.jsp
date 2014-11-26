@@ -22,11 +22,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <i class="glyphicon glyphicon-wrench"> ${kouji.kjMeisyo}test</i>
-                <span class="label label-warning">status</span>
+                <i class="glyphicon glyphicon-wrench"> ${kouji.kjMeisyo}</i>
+                <span class="label label-warning">${kouji.status}</span>
             </h1>
             <ol class="breadcrumb">
-                <li><i class="fa fa-dashboard"></i> Index/${kouji.kjMeisyo}test</li>
+                <li><i class="fa fa-dashboard"></i> Index/${kouji.kjMeisyo}</li>
             </ol>
         </section>
         <hr/>
@@ -43,32 +43,33 @@
                         <div class="panel-body">
                             <div class="row form-group">
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control" value="kjNo" />
+                                    <input type="text" class="form-control" value="${kouji.kjNo}" />
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" value="kjMeisyo" />
+                                    <input type="text" class="form-control" value="${kouji.kjMeisyo}" />
                                 </div>
                             </div>
 
                             <div class="row form-group">
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control" value="responsibility" />
+                                    <input type="text" class="form-control" value="${kouji.person}" />
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" value="bgnYmd" />
+                                    <input type="text" class="form-control" value="${kouji.bgnYmd}" />
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" value="endYmd" />
+                                    <input type="text" class="form-control" value="${kouji.endYmd}" />
                                 </div>
                             </div>
 
                             <div class="row form-group">
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" value="location" />
+                                    <input type="text" class="form-control" value="${kouji.location}" />
                                 </div>
                                 <div class="col-md-2">
                                     <select class="form-control">
-                                        <option>区分</option>
+                                        <option>${kouji.kjKbn}</option>
+
                                     </select>
                                 </div>
                             </div>
@@ -105,10 +106,11 @@
                                 <tr class="bg-gray">
                                     <th>弁番号</th>
                                     <th>弁名称</th>
-                                    <th>機器番号</th>
+                                    <th>機器分類</th>
                                     <th>機器名称</th>
+                                    <th>型式番号</th>
                                     <th>点検結果</th>
-                                    <th>懸案</th>
+                                    <th><input type="text" class="form-control" placeholder="検索"/></th>
                                 </tr>
                                 <tr>
                                     <td>弁番号</td>
@@ -254,4 +256,10 @@
         </section>
     </div>
 </body>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("")
+    });
+</script>
 </html>
