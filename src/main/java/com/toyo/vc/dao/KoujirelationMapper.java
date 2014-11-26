@@ -14,6 +14,10 @@ public interface KoujirelationMapper {
 
     /**IDから関係データを取得*/
     public Koujirelation findKoujirelationById(String id);
+
+    /**IDから工事、弁、機器の関連データを取得*/
+    public List<Koujirelation> findAllKoujirelationByKoujiid(String id);
+
     /**koujiidから関連の弁IDリストを取得*/
     public List<Valve> findKikisysListByKoujiid(String koujiid);
     /**koujiidと弁IDから機器IDリストを取得*/

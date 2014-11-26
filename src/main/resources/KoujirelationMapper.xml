@@ -6,6 +6,12 @@
         select * from koujirelation where id=#{id}
     </select>
 
+    <select id="findAllKoujirelationByKoujiid" parameterType="String" resultType="Koujirelation">
+        select *
+        from koujirelation
+        where koujiid=#{koujiid}
+    </select>
+
     <select id="findKikisysListByKoujiid" parameterType="String" resultType="Valve">
         select distinct koujirelation.kikisysid,kikisystem.*
         from koujirelation
