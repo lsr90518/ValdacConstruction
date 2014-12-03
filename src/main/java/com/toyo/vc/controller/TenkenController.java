@@ -31,7 +31,8 @@ public class TenkenController {
     @RequestMapping(value = "/saveTenkenrank", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String saveTenkenrank(@RequestParam("id")String rirekiId,
-                                  @RequestParam("tenkenrank")String tenkenrank){
+                                  @RequestParam("tenkenrank")String tenkenrank,
+                                  HttpSession session){
         TenkenRireki tenkenRireki = tenkenRirekiService.getTenkenRirekiById(rirekiId);
         if(tenkenrank.length() < 1) {
             tenkenRireki.setKanryoFlg("未完成");
@@ -40,6 +41,19 @@ public class TenkenController {
             tenkenRireki.setKanryoFlg("完成");
         }
 
+        List<TenkenRirekiUtil> tenkenRirekiUtilList = (List<TenkenRirekiUtil>) session.getAttribute("tenkenRirekiUtilList");
+        for (int i = 0; i < tenkenRirekiUtilList.size(); i++) {
+            if(tenkenRireki.getId() == tenkenRirekiUtilList.get(i).getId()){
+                if(tenkenrank.length() < 1) {
+                    tenkenRirekiUtilList.get(i).setKanryoFlg("未完成");
+                } else {
+                    tenkenRirekiUtilList.get(i).setKanryoFlg("完成");
+                    tenkenRirekiUtilList.get(i).setTenkenRank(tenkenrank);
+                }
+                break;
+            }
+        }
+        session.setAttribute("tenkenRirekiUtilList",tenkenRirekiUtilList);
         tenkenRirekiService.updateTenkenRireki(tenkenRireki);
         return tenkenRireki.getKanryoFlg();
     }
@@ -49,22 +63,34 @@ public class TenkenController {
                                   @RequestParam("tenkenkekka")String tenkenkekka,
                                   HttpSession session){
         TenkenRireki tenkenRireki = tenkenRirekiService.getTenkenRirekiById(rirekiId);
-//        List<TenkenRirekiUtil> tenkenRirekiUtilList = (List<TenkenRirekiUtil>) session.getAttribute("tenkenRirekiUtilList");
-//        int index = tenkenRirekiUtilList.indexOf(tenkenRireki);
-
+        String result = "";
         if(tenkenRireki.getTenkenkekka() == null){
             tenkenRireki.setTenkenkekka(tenkenkekka);
             tenkenRirekiService.updateTenkenRireki(tenkenRireki);
-            return "1";
+            result = "1";
         } else {
             if (!tenkenRireki.getTenkenkekka().equals(tenkenkekka)) {
                 tenkenRireki.setTenkenkekka(tenkenkekka);
                 tenkenRirekiService.updateTenkenRireki(tenkenRireki);
-                return "1";
+                result = "1";
             } else {
-                return "0";
+                result = "0";
             }
         }
+
+        // update session cache
+        List<TenkenRirekiUtil> tenkenRirekiUtilList = (List<TenkenRirekiUtil>) session.getAttribute("tenkenRirekiUtilList");
+        for (int i = 0; i < tenkenRirekiUtilList.size(); i++) {
+            if(tenkenRireki.getId() == tenkenRirekiUtilList.get(i).getId()){
+                if(result == "1") {
+                    tenkenRirekiUtilList.get(i).setTenkenkekka(tenkenkekka);
+                }
+                break;
+            }
+        }
+        session.setAttribute("tenkenRirekiUtilList",tenkenRirekiUtilList);
+
+        return result;
     }
 
     @RequestMapping(value = "/getTenkenrirekiByPage", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
@@ -74,7 +100,7 @@ public class TenkenController {
 
         List<TenkenRirekiUtil> tenkenRirekiUtilList = (List<TenkenRirekiUtil>) session.getAttribute("tenkenRirekiUtilList");
         //page control
-        int countInOnePage = 3;
+        int countInOnePage = 20;
         int pageCount = 0;
         int currentIndex = countInOnePage * Integer.valueOf(currentPage);
         List<TenkenRirekiUtil> tenkenRirekiUtils = new ArrayList<TenkenRirekiUtil>();
@@ -107,6 +133,51 @@ public class TenkenController {
         int incomplete = 0;
         for (int i = 0; i < tenkenRirekiUtilList.size(); i++) {
             if(tenkenRirekiUtilList.get(i).getKanryoFlg().equals("完成")){
+                complete++;
+            } else {
+                incomplete++;
+            }
+        }
+
+        Map<String, Integer> numbers = new HashMap<String, Integer>();
+        numbers.put("total",total);
+        numbers.put("complete",complete);
+        numbers.put("incomplete",incomplete);
+        Gson gson = new Gson();
+        return gson.toJson(numbers);
+    }
+
+    @RequestMapping(value = "/saveTenkennaiyo", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String saveTenkennaiyo(@RequestParam("id")String rirekiId,
+                                  @RequestParam("tenkennaiyo")String tenkennaiyo,
+                                  HttpSession session){
+        TenkenRireki tenkenRireki = tenkenRirekiService.getTenkenRirekiById(rirekiId);
+        tenkenRireki.setTenkennaiyo(tenkennaiyo);
+
+
+        List<TenkenRirekiUtil> tenkenRirekiUtilList = (List<TenkenRirekiUtil>) session.getAttribute("tenkenRirekiUtilList");
+        for (int i = 0; i < tenkenRirekiUtilList.size(); i++) {
+            if(tenkenRireki.getId() == tenkenRirekiUtilList.get(i).getId()){
+                tenkenRireki.setTenkennaiyo(tenkennaiyo);
+                break;
+            }
+        }
+        session.setAttribute("tenkenRirekiUtilList",tenkenRirekiUtilList);
+        tenkenRirekiService.updateTenkenRireki(tenkenRireki);
+        return "";
+
+    }
+
+    @RequestMapping(value = "/getNaiyoNumbers", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getNaiyoNumbers(HttpSession session){
+        List<TenkenRirekiUtil> tenkenRirekiUtilList = (List<TenkenRirekiUtil>) session.getAttribute("tenkenRirekiUtilList");
+        int total = tenkenRirekiUtilList.size();
+        int complete = 0;
+        int incomplete = 0;
+        for (int i = 0; i < tenkenRirekiUtilList.size(); i++) {
+            if(tenkenRirekiUtilList.get(i).getTenkennaiyo().length() > 0){
                 complete++;
             } else {
                 incomplete++;

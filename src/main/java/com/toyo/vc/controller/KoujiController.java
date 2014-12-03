@@ -73,6 +73,24 @@ public class KoujiController {
         return "/kouji/index";
     }
 
+    @RequestMapping(value = "/{id}/instruct", method = RequestMethod.GET)
+    public String getInstruct(@PathVariable("id")String id, ModelMap modelMap, HttpSession session){
+        Kouji kouji = koujiService.getKoujiById(id);
+        List<TenkenRirekiUtil> tenkenRirekiUtilList = tenkenRirekiService.getTenkenRirekiByKoujiId(id);
+
+        for (int i = 0; i < tenkenRirekiUtilList.size(); i++) {
+            Koujirelation koujirelation = koujirelationService.getKoujirelationById(tenkenRirekiUtilList.get(i).getKoujirelationId() + "");
+            Valve valve = itemService.getKikisysByKikisysId(koujirelation.getKikisysid() + "");
+            tenkenRirekiUtilList.get(i).setValve(valve);
+        }
+
+        //make cache
+        session.setAttribute("tenkenRirekiUtilList",tenkenRirekiUtilList);
+
+        modelMap.addAttribute("kouji", kouji);
+        return "/kouji/instruct";
+    }
+
     @RequestMapping(value = "/{id}/history", method = RequestMethod.GET)
     public String getHistoryById(@PathVariable("id")String id, ModelMap modelMap){
         Kouji kouji = new Kouji();
