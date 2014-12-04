@@ -15,6 +15,8 @@ public class TenkenRirekiUtil extends Kiki {
     public String tenkennaiyo;
     public String tenkenkekka;
     public String kanryoFlg;
+    public String trkDate;
+    public String updDate;
 
     private Valve valve;
 
@@ -45,6 +47,11 @@ public class TenkenRirekiUtil extends Kiki {
     public String getKanryoFlg(){return kanryoFlg;}
     public void setKanryoFlg(String kanryoFlg){this.kanryoFlg=kanryoFlg;}
 
+    public String getTrkDate(){return  trkDate;}
+    public void setTrkDate(String trkDate){this.trkDate=trkDate;}
+
+    public String getUpdDate(){return  updDate;}
+    public void setUpdDate(String updDate){this.updDate=updDate;}
 
     public Valve getValve() {
         return valve;

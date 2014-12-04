@@ -29,6 +29,19 @@ public class TenkenRirekiService {
         return  tenkenKikiForms;
     }
 
+    /**
+     * 工事IDと完了フラグから点検機器を取得
+     * 更新時間のDESC順
+     * */
+    public List<TenkenRirekiUtil> getTenkenRirekiByKoujiIdAndKanryoFlg(String koujiId,String kanryoFlg){
+        TenkenRireki tenkenRireki=new TenkenRireki();
+        tenkenRireki.setKanryoFlg(kanryoFlg);
+        tenkenRireki.setKoujiId(Integer.parseInt(koujiId));
+
+        List<TenkenRirekiUtil> tenkenKikiForms= tenkenRirekiMapper.findTenkenRirekiByKoujiIdAndKanryoFlg(tenkenRireki);
+        return  tenkenKikiForms;
+    }
+
     public TenkenRireki addTenkenRireki(TenkenRireki tenkenRireki){
         Date date=new Date();
         SimpleDateFormat sdf1=new SimpleDateFormat("yyyy/MM/dd");
