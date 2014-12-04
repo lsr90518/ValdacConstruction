@@ -124,6 +124,37 @@ public class TenkenController {
         return gson.toJson(result);
     }
 
+    @RequestMapping(value = "/getTenkenrirekiHitoryByPage", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getTenkenrirekiHitoryByPage(@RequestParam("currentPage")String currentPage,
+                                              HttpSession session){
+        List<TenkenRirekiUtil> tenkenRirekiUtilList = (List<TenkenRirekiUtil>) session.getAttribute("tenkenRirekiHistory");
+        //page control
+        int countInOnePage = 2;
+        int pageCount = 0;
+        int currentIndex = countInOnePage * Integer.valueOf(currentPage);
+        List<TenkenRirekiUtil> tenkenRirekiUtils = new ArrayList<TenkenRirekiUtil>();
+        pageCount = tenkenRirekiUtilList.size()/countInOnePage;
+        if(tenkenRirekiUtilList.size()%countInOnePage != 0){
+            pageCount++;
+        }
+        int addCount = currentIndex + countInOnePage;
+        if(tenkenRirekiUtilList.size() < addCount){
+            addCount = tenkenRirekiUtilList.size();
+        }
+        for (int i = currentIndex; i < addCount; i++) {
+            tenkenRirekiUtils.add(tenkenRirekiUtilList.get(i));
+        }
+
+        Map<String,Object> result = new HashMap<String, Object>();
+        result.put("pageCount", pageCount);
+        result.put("currentPage", Integer.valueOf(currentPage));
+        result.put("tenkenRirekiList", tenkenRirekiUtils);
+
+        Gson gson = new Gson();
+        return gson.toJson(result);
+    }
+
     @RequestMapping(value = "/getListNumber", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getListNumber(HttpSession session){

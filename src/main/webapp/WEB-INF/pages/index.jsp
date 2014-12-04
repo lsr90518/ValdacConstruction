@@ -69,10 +69,10 @@
                                             <td>${kouji.person}</td>
                                             <td>
                                                 <c:choose>
-                                                    <c:when test="${kouji.status == '1'}">
+                                                    <c:when test="${kouji.status == '完成'}">
                                                         <span class="label label-success">完成</span>
                                                     </c:when>
-                                                    <c:when test="${kouji.status == '0'}">
+                                                    <c:when test="${kouji.status == '未完成'}">
                                                         <span class="label label-warning">未完成</span>
                                                     </c:when>
                                                 </c:choose>
@@ -108,10 +108,10 @@
                                             <td>${kouji.person}</td>
                                             <td>
                                                 <c:choose>
-                                                    <c:when test="${kouji.status == '1'}">
+                                                    <c:when test="${kouji.status == '完成'}">
                                                         <span class="label label-success">完成</span>
                                                     </c:when>
-                                                    <c:when test="${kouji.status == '0'}">
+                                                    <c:when test="${kouji.status == '未完成'}">
                                                         <span class="label label-warning">未完成</span>
                                                     </c:when>
                                                 </c:choose>
@@ -139,99 +139,57 @@
 
                             <div class="row well-sm">
                                 <div class="col-md-12">
-                                    <input type="text" class="form-control input-sm" placeholder="履歴から検索" />
+                                    <ul class="nav nav-tabs nav-justified">
+                                        <li class="active"><a href="#timeline" data-toggle="tab">点検履歴</a></li>
+                                        <li class=""><a href="#kenanList" data-toggle="tab">懸案履歴</a></li>
+
+                                    </ul>
                                 </div>
                             </div>
+                            <div class="tab-content">
+                            <div class="tab-pane active" id="timeline">
+                            <ul class="timeline" >
 
-                            <ul class="timeline">
+                                <c:forEach items="${tenkenRirekiHistory}" var="tenkenRireki">
+                                    <li>
+                                        <!-- timeline icon -->
+                                        <i class="glyphicon glyphicon-check bg-green"></i>
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fa fa-clock-o"></i> ${tenkenRireki.updDate}</span>
 
-                                <!-- timeline item -->
-                                <li>
-                                    <!-- timeline icon -->
-                                    <i class="glyphicon glyphicon-check bg-green"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fa fa-clock-o"></i> 10 Feb. 2014</span>
 
-                                        <%--<h3 class="timeline-header"><a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案) </h3>--%>
+                                            <div class="timeline-body">
+                                                    ${tenkenRireki.valve.vNo} ( ${tenkenRireki.valve.benMeisyo} ) の
+                                                    ${tenkenRireki.kikiBunrui} ( ${tenkenRireki.kikiMei} ) -> ${tenkenRireki.tenkenRank} ( ${tenkenRireki.tenkenkekka} )
+                                            </div>
 
-                                        <div class="timeline-body">
-                                            <a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案)
                                         </div>
-
-                                        <%--<div class='timeline-footer'>--%>
-                                            <%--<a class="btn btn-primary btn-xs">...</a>--%>
-                                        <%--</div>--%>
-                                    </div>
-                                </li>
-                                <li>
-                                    <!-- timeline icon -->
-                                    <i class="glyphicon glyphicon-check bg-green"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fa fa-clock-o"></i> 10 Feb. 2014</span>
-
-                                        <div class="timeline-body">
-                                            <a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案)
-                                        </div>
-
-                                        <%--<div class='timeline-footer'>--%>
-                                        <%--<a class="btn btn-primary btn-xs">...</a>--%>
-                                        <%--</div>--%>
-                                    </div>
-                                </li>
-                                <li>
-                                    <!-- timeline icon -->
-                                    <i class="glyphicon glyphicon-floppy-save bg-red"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fa fa-clock-o"></i> 10 Feb. 2014</span>
-
-                                        <%--<h3 class="timeline-header"><a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案) </h3>--%>
-
-                                        <div class="timeline-body">
-                                            <a href="#">A</a> 機器番号(機器名称) -> (懸案)
-                                        </div>
-
-                                        <%--<div class='timeline-footer'>--%>
-                                        <%--<a class="btn btn-primary btn-xs">...</a>--%>
-                                        <%--</div>--%>
-                                    </div>
-                                </li>
-                                <li>
-                                    <!-- timeline icon -->
-                                    <i class="glyphicon glyphicon-check bg-green"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fa fa-clock-o"></i> 10 Feb. 2014</span>
-
-                                        <%--<h3 class="timeline-header"><a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案) </h3>--%>
-
-                                        <div class="timeline-body">
-                                            <a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案)
-                                        </div>
-
-                                        <%--<div class='timeline-footer'>--%>
-                                        <%--<a class="btn btn-primary btn-xs">...</a>--%>
-                                        <%--</div>--%>
-                                    </div>
-                                </li>
-                                <li>
-                                    <!-- timeline icon -->
-                                    <i class="glyphicon glyphicon-check bg-green"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fa fa-clock-o"></i> 10 Feb. 2014</span>
-
-                                        <%--<h3 class="timeline-header"><a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案) </h3>--%>
-
-                                        <div class="timeline-body">
-                                            <a href="#">A</a> 機器番号(機器名称) -> 点検ランク(懸案)
-                                        </div>
-
-                                        <%--<div class='timeline-footer'>--%>
-                                        <%--<a class="btn btn-primary btn-xs">...</a>--%>
-                                        <%--</div>--%>
-                                    </div>
-                                </li>
-                                <!-- END timeline item -->
-
+                                    </li>
+                                </c:forEach>
                             </ul>
+                            </div>
+                            <div class="tab-pane" id="kenanList">
+                                <ul class="timeline" >
+
+                                    <c:forEach items="${tenkenRirekiHistory}" var="tenkenRireki">
+                                        <li>
+                                            <!-- timeline icon -->
+                                            <i class="glyphicon glyphicon-floppy-saved bg-red"></i>
+                                            <div class="timeline-item">
+                                                <span class="time"><i class="fa fa-clock-o"></i> ${tenkenRireki.updDate}</span>
+
+
+                                                <div class="timeline-body">
+                                                        ${tenkenRireki.valve.vNo} ( ${tenkenRireki.valve.benMeisyo} ) の
+                                                        ${tenkenRireki.kikiBunrui} ( ${tenkenRireki.kikiMei} ) -> ${tenkenRireki.tenkenRank} ( ${tenkenRireki.tenkenkekka} )
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>

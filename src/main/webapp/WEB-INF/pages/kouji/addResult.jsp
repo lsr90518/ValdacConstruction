@@ -143,7 +143,7 @@
 
                             <div class="row form-group">
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="syukan" value="" placeholder="主管係"/>
+                                    <input type="text" class="form-control" name="syukan" value="${kouji.syukan}" placeholder="主管係"/>
                                 </div>
                                 <div class="col-md-4">
                                     <select name="gyosyaRyakuA" class="form-control">

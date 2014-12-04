@@ -18,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">工事支援</a>
+                <a class="navbar-brand" href="/">工事支援</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

@@ -527,6 +527,10 @@ Component: timeline
     margin-right: 5px;
 }
 
+.kiki-table{
+    font-size: small;
+}
+
 /* Background colors */
 .bg-red,
 .bg-yellow,

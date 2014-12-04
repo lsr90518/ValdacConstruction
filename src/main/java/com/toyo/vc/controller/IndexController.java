@@ -1,8 +1,11 @@
 package com.toyo.vc.controller;
 
 import com.toyo.vc.entity.Kouji;
+import com.toyo.vc.entity.TenkenRireki;
+import com.toyo.vc.entity.TenkenRirekiUtil;
 import com.toyo.vc.entity.User;
 import com.toyo.vc.service.KoujiService;
+import com.toyo.vc.service.TenkenRirekiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +27,8 @@ public class IndexController {
 
     @Autowired
     KoujiService koujiService;
+    @Autowired
+    TenkenRirekiService tenkenRirekiService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(HttpSession session, ModelMap modelMap){
@@ -32,11 +37,26 @@ public class IndexController {
             return "login";
         } else {
             if(user.getKengen().equals("6")){
-                modelMap.addAttribute("lastedKoujiList",koujiService.getLastedTenKoujiByPerson("zui"));
-                modelMap.addAttribute("updatedKoujiList",koujiService.getUpdateTenKoujiByPerson("zui"));
+                List<Kouji> lastedKoujiList = koujiService.getLastedTenKoujiByPerson("zui");
+                List<Kouji> updatedKoujiList = koujiService.getUpdateTenKoujiByPerson("zui");
+                modelMap.addAttribute("lastedKoujiList",lastedKoujiList);
+                modelMap.addAttribute("updatedKoujiList",updatedKoujiList);
+                List<TenkenRirekiUtil> tenkenRirekiList = tenkenRirekiService.getTenkenRirekiByKoujiId(lastedKoujiList.get(0).getId()+"");
+                if(tenkenRirekiList.size()>10){
+                    tenkenRirekiList = tenkenRirekiList.subList(0,10);
+                }
+                modelMap.addAttribute("tenkenRirekiHistory",tenkenRirekiList);
+
             } else {
-                modelMap.addAttribute("lastedKoujiList",koujiService.getLastedTenKoujiByPerson(user.getUserid()));
-                modelMap.addAttribute("updatedKoujiList",koujiService.getUpdateTenKoujiByPerson(user.getUserid()));
+                List<Kouji> lastedKoujiList = koujiService.getLastedTenKoujiByPerson(user.getUserid());
+                List<Kouji> updatedKoujiList = koujiService.getUpdateTenKoujiByPerson(user.getUserid());
+                modelMap.addAttribute("lastedKoujiList",lastedKoujiList);
+                modelMap.addAttribute("updatedKoujiList",updatedKoujiList);
+                List<TenkenRirekiUtil> tenkenRirekiList = tenkenRirekiService.getTenkenRirekiByKoujiId(lastedKoujiList.get(0).getId()+"");
+                if(tenkenRirekiList.size()>10){
+                    tenkenRirekiList = tenkenRirekiList.subList(0,10);
+                }
+                modelMap.addAttribute("tenkenRirekiHistory",tenkenRirekiList);
             }
             return "index";
         }

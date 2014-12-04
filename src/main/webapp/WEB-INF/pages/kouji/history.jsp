@@ -22,60 +22,41 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="glyphicon glyphicon-wrench"> ${kouji.kjMeisyo}test</i>
-            <span class="label label-warning">status</span>
+            <i class="glyphicon glyphicon-wrench"> ${kouji.kjMeisyo}</i>
+            <c:choose>
+                <c:when test="${kouji.status == '未完成'}">
+                    <span class="label label-warning">${kouji.status}</span>
+                </c:when>
+                <c:when test="${kouji.status == '完成'}">
+                    <span class="label label-success">${kouji.status}</span>
+                </c:when>
+
+            </c:choose>
+
         </h1>
         <ol class="breadcrumb">
-            <li><i class="fa fa-dashboard"></i> Index/${kouji.kjMeisyo}test</li>
+            <li><i class="fa fa-dashboard"></i> Index/${kouji.kjMeisyo}</li>
         </ol>
     </section>
     <hr/>
 
     <section class="content">
         <div class="row">
-            <div class="col-md-10">
-                <ul class="timeline">
-
-                    <!-- timeline time label -->
-                    <li class="time-label">
-                        <span class="bg-red">
-                            10 Feb. 2014
-                        </span>
-                    </li>
-                    <!-- /.timeline-label -->
-
-                    <!-- timeline item -->
-                    <li>
-                        <!-- timeline icon -->
-                        <i class="fa fa-envelope bg-blue"></i>
-                        <div class="timeline-item">
-                            <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-                            <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
-
-                            <div class="timeline-body">
-                                ...
-                                Content goes here
-                            </div>
-
-                            <div class='timeline-footer'>
-                                <a class="btn btn-primary btn-xs">...</a>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- END timeline item -->
-
-                    ...
-
+            <input type="hidden" id="currentPage" value="0" />
+            <div class="col-md-11">
+                <ul class="timeline" id="tenkenRireki">
                 </ul>
+                <input type="button" class="btn btn-block btn-sm btn-default bg-blue-gradient" value="もっと" onclick="changePage()" />
             </div>
             <!-- information tab -->
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-pills nav-stacked bookmarkUl">
-                            <li role="presentation"><a href="/kouji/index">情報</a></li>
-                            <li role="presentation" class="currentBookmark"><a href="/kouji/history">履歴</a></li>
+                            <li role="presentation"><a href="/kouji/${kouji.id}">情報</a></li>
+                            <li role="presentation"><a href="/kouji/${kouji.id}/instruct">指示</a></li>
+                            <li role="presentation"><a href="/kouji/${kouji.id}/kenan">懸案</a></li>
+                            <li role="presentation" class="currentBookmark"><a href="/kouji/${kouji.id}/history">履歴</a></li>
                         </ul>
                     </div>
                 </div>
@@ -85,4 +66,39 @@
     </section>
 </div>
 </body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        changePage();
+    });
+
+    function changePage(){
+        var currentPage = $("#currentPage").val();
+        $.get("/tenken/getTenkenrirekiHitoryByPage",{"currentPage":currentPage},function(data){
+            var datas = JSON.parse(data);
+            console.log(datas);
+            var originalHTML = $("#tenkenRireki").html();
+            var tmpHtml = "";
+            for(var i = 0;i<datas.tenkenRirekiList.length;i++){
+
+
+                tmpHtml = tmpHtml +
+                        '<li>'+
+                        '<i class="glyphicon glyphicon-check bg-green"></i>'+
+                        '<div class="timeline-item">'+
+                        '<span class="time"><i class="fa fa-clock-o"></i> '+datas.tenkenRirekiList[i].updDate+'</span>'+
+                        '<h3 class="timeline-header"><a href="#">'+datas.tenkenRirekiList[i].valve.vNo+' : 点検内容'+datas.tenkenRirekiList[i].tenkennaiyo+'</a> </h3>'+
+                        '<div class="timeline-body">'+
+                        datas.tenkenRirekiList[i].valve.vNo+' ( '+datas.tenkenRirekiList[i].valve.benMeisyo+' ) の '+
+                        datas.tenkenRirekiList[i].kikiBunrui+' ( '+datas.tenkenRirekiList[i].kikiMei+' ) -> '+ datas.tenkenRirekiList[i].tenkenRank+' ( '+datas.tenkenRirekiList[i].tenkenkekka+' ) '+
+                        '</div>'+
+                        '</div>'+
+                        '</li>';
+            }
+            $("#tenkenRireki").html(originalHTML + tmpHtml);
+            $("#currentPage").val(datas.currentPage+1);
+
+
+        });
+    }
+</script>
 </html>

@@ -3,10 +3,7 @@ package com.toyo.vc.controller;
 import com.toyo.vc.dto.KoujiForm;
 import com.toyo.vc.dto.ValveKikiSelectUtil;
 import com.toyo.vc.entity.*;
-import com.toyo.vc.service.ItemService;
-import com.toyo.vc.service.KoujiService;
-import com.toyo.vc.service.KoujirelationService;
-import com.toyo.vc.service.TenkenRirekiService;
+import com.toyo.vc.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -32,6 +29,8 @@ public class KoujiController {
     KoujirelationService koujirelationService;
     @Autowired
     TenkenRirekiService tenkenRirekiService;
+    @Autowired
+    KenanService kenanService;
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -92,10 +91,30 @@ public class KoujiController {
     }
 
     @RequestMapping(value = "/{id}/history", method = RequestMethod.GET)
-    public String getHistoryById(@PathVariable("id")String id, ModelMap modelMap){
-        Kouji kouji = new Kouji();
+    public String getHistoryById(@PathVariable("id")String id, ModelMap modelMap, HttpSession session){
+        Kouji kouji = koujiService.getKoujiById(id);
         modelMap.addAttribute("kouji",kouji);
+
+        List<TenkenRirekiUtil> tenkenRirekiUtilList = tenkenRirekiService.getTenkenRirekiByKoujiId(id);
+        for (int i = 0; i < tenkenRirekiUtilList.size(); i++) {
+            Koujirelation koujirelation = koujirelationService.getKoujirelationById(tenkenRirekiUtilList.get(i).getKoujirelationId() + "");
+            Valve valve = itemService.getKikisysByKikisysId(koujirelation.getKikisysid() + "");
+            tenkenRirekiUtilList.get(i).setValve(valve);
+        }
+
+        //make cache
+        session.setAttribute("tenkenRirekiHistory",tenkenRirekiUtilList);
         return "/kouji/history";
+    }
+
+    @RequestMapping(value = "/{id}/kenan", method = RequestMethod.GET)
+    public String getKenanByKoujiId(@PathVariable("id")String id, ModelMap modelMap, HttpSession session){
+        Kouji kouji = koujiService.getKoujiById(id);
+        modelMap.addAttribute("kouji",kouji);
+
+        List<Kenan> kenanList = kenanService.getKenanByKoujiId(id);
+        modelMap.addAttribute("kenanList",kenanList);
+        return "/kouji/kenan";
     }
 
     @RequestMapping(value = "/{id}/valve", method = RequestMethod.POST)
@@ -172,4 +191,11 @@ public class KoujiController {
 
         return "redirect:/kouji/"+koujiId;
     }
+
+    @RequestMapping(value = "/updateKouji", method = RequestMethod.POST)
+    public String updateKouji(@ModelAttribute("KoujiForm")KoujiForm koujiForm, ModelMap modelMap){
+        koujiService.updateKouji(koujiForm);
+        return "redirect:/kouji/"+koujiForm.getId();
+    }
+
 }
