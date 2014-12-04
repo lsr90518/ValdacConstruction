@@ -18,8 +18,7 @@ public class Kiki {
     public String orderNo;
     public String bikou;
     public String imageId;
-    public String trkDate;
-    public String updDate;
+
 
     public String toText(){
         String text =
@@ -36,22 +35,7 @@ public class Kiki {
         return text;
     }
 
-    public int getTrkDateInt(){
-        String intDate[] = trkDate.split("/");
-        String result = "";
-        for (int i = 0; i < intDate.length; i++) {
-            result = result + intDate[i];
-        }
-        return Integer.valueOf(result);
-    }
-    public int getUpdDateInt(){
-        String intDate[] = updDate.split("/");
-        String result = "";
-        for (int i = 0; i < intDate.length; i++) {
-            result = result + intDate[i];
-        }
-        return Integer.valueOf(result);
-    }
+
 
     public int getKikiId() {
         return kikiId;
@@ -157,19 +141,4 @@ public class Kiki {
         this.imageId = imageId;
     }
 
-    public String getTrkDate() {
-        return trkDate;
-    }
-
-    public void setTrkDate(String trkDate) {
-        this.trkDate = trkDate;
-    }
-
-    public String getUpdDate() {
-        return updDate;
-    }
-
-    public void setUpdDate(String updDate) {
-        this.updDate = updDate;
-    }
 }

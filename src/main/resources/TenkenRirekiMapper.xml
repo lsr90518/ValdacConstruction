@@ -7,11 +7,19 @@
     </select>
 
     <select id="findTenkenRirekiByKoujiId" parameterType="String" resultType="TenkenRirekiUtil">
-        select kiki.*,tenkenRireki.*
+        select tenkenRireki.*,kiki.*
         from tenkenRireki
         LEFT JOIN kiki
         ON tenkenRireki.kikiId=kiki.kikiId
         WHERE tenkenRireki.koujiId=#{koujiId}
+    </select>
+
+    <select id="findTenkenRirekiByKoujiIdAndKanryoFlg" parameterType="TenkenRirekiUtil" resultType="TenkenRirekiUtil">
+        select tenkenRireki.*,kiki.*
+        from tenkenRireki
+        LEFT JOIN kiki
+        ON tenkenRireki.kikiId=kiki.kikiId
+        WHERE tenkenRireki.koujiId=#{koujiId} and kanryoFlg=#{kanryoFlg} ORDER BY tenkenRireki.updDate DESC
     </select>
 
     <insert id="insertTenkenRireki" parameterType="TenkenRireki">

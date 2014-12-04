@@ -16,6 +16,9 @@ public interface TenkenRirekiMapper {
     /**KoujiIDから点検機器情報を取得*/
     public List<TenkenRirekiUtil> findTenkenRirekiByKoujiId(String koujiId);
 
+    /**KoujiID,statusから点検機器情報を取得*/
+    public List<TenkenRirekiUtil> findTenkenRirekiByKoujiIdAndKanryoFlg(TenkenRireki tenkenRireki);
+
     /**新規点検機器を追加する*/
     public void insertTenkenRireki(TenkenRireki tenkenRireki);
 
