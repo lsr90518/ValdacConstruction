@@ -25,6 +25,12 @@ public class ReportImageService {
         return  reportImage;
     }
 
+    public ReportImage getReportImageByImagename(String imagename){
+
+        ReportImage reportImage = reportImageMapper.findReportImageByImagename(imagename);
+        return reportImage;
+    }
+
     /**工事の画像リストを取得*/
     public List<ReportImage> getReportImageByKoujiId(String koujiId){
 

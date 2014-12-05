@@ -152,10 +152,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="nav nav-pills nav-stacked bookmarkUl">
-                                <li role="presentation" class="currentBookmark"><a href="/kouji/${kouji.id}">情報</a></li>
-                                <li role="presentation" ><a href="/kouji/${kouji.id}/instruct">指示</a></li>
-                                <li role="presentation"><a href="/kouji/${kouji.id}/kenan">懸案</a></li>
-                                <li role="presentation"><a href="/kouji/${kouji.id}/history">履歴</a></li>
+                                <li role="presentation" class="currentBookmark"><a href="/kouji/${kouji.id}"><i class="glyphicon glyphicon-cog"> 情報</i></a></li>
+                                <li role="presentation" ><a href="/kouji/${kouji.id}/instruct"><i class="glyphicon glyphicon-indent-left"> 指示</i></a></li>
+                                <li role="presentation"><a href="/kouji/${kouji.id}/kenan"><i class="glyphicon glyphicon-floppy-save"> 懸案</i></a></li>
+                                <li role="presentation"><a href="/kouji/${kouji.id}/history"><i class="glyphicon glyphicon-time"> 履歴</i></a></li>
+                                <li role="presentation"><a href="/kouji/${kouji.id}/image"><i class="glyphicon glyphicon-picture"> 図面</i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -167,7 +168,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="kenanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -175,35 +176,74 @@
             </div>
             <div class="modal-body">
                 <form id="kenanForm" name="kenanForm">
-                    <input type="hidden" id="rirekiId" name="rirekiId" value="" />
-                <div class="row form-group">
 
-                    <div class="col-md-3">
-                        <input type="text" name="jisyo" class="form-control kenanForm-input" value="" placeholder="事象" />
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <h3>
+                                <i class="glyphicon glyphicon-wrench"> <span class="kenanForm-span" id="koujiInfo"></span></i>
+                            </h3>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <input type="text" name="buhin" class="form-control kenanForm-input" value="" placeholder="部品" />
-                    </div>
-                    <div class="col-md-3">
-                        <input type="text" name="gensyo" class="form-control kenanForm-input" value="" placeholder="現象" />
-                    </div>
-                    <div class="col-md-3">
-                        <input type="text" name="taisaku" class="form-control kenanForm-input" value="" placeholder="対策" />
-                    </div>
-                </div>
 
-                <div class="row form-group">
-                    <div class="col-md-3">
-                        <input type="text" name="hakkenJyokyo" class="form-control kenanForm-input" value="" placeholder="発見状況" />
+                    <div class="row form-group">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                                <span class="kenanForm-span" id="kikisysInfo"></span>
+                        </div>
                     </div>
-                    <div class="col-md-9">
-                        <input type="text" name="syotiNaiyo" class="form-control kenanForm-input" value="" placeholder="処置内容" />
+
+                    <input type="hidden" id="kenanKoujiId" class="kenanForm-input" name="koujiId" value="" />
+                    <input type="hidden" id="kenanKoujirelationId" class="kenanForm-input" name="koujirelationId" value="" />
+                    <input type="hidden" id="kenanKikiId" class="kenanForm-input" name="kikiId" value="" />
+
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">懸案状況</h3>
+                        </div>
+                        <div class="panel-body">
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <input type="text" name="jisyo" class="form-control kenanForm-input" value="" placeholder="事象" />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="buhin" class="form-control kenanForm-input" value="" placeholder="部品" />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="gensyo" class="form-control kenanForm-input" value="" placeholder="現象" />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="taisaku" class="form-control kenanForm-input" value="" placeholder="対策" />
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <input type="text" name="hakkenJyokyo" class="form-control kenanForm-input" value="" placeholder="発見状況" />
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="youin" class="form-control kenanForm-input" value="" placeholder="要因" />
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="syotiNaiyo" class="form-control kenanForm-input" value="" placeholder="処置内容" />
+                            </div>
+                        </div>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <input type="text" name="hakkenDate" class="form-control kenanForm-input" value="" placeholder="発見日付" />
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" name="taisakuDate" class="form-control kenanForm-input" value="" placeholder="対策日付" />
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" name="taiouFlg" class="form-control kenanForm-input" value="" placeholder="対応" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">保存</button>
+                <button type="button" onclick="saveKenan()" class="btn btn-primary">保存</button>
             </div>
         </div>
     </div>
@@ -387,8 +427,30 @@
         var rireki = $(obj).parent().parent();
         var rirekiId = rireki[0].id;
         $("#rirekiId").val(rirekiId);
-        $(".kenanForm-input").val("");
-        $("#kenanModal").modal();
+        $.get("/kenan/addKenanByTenkenrireki",{"id":rirekiId},function(data){
+            var koujiFormData = JSON.parse(data);
+            $(".kenanForm-input").val("");
+            var koujiInfo = koujiFormData.kouji.kjNo + "/" + koujiFormData.kouji.kjMeisyo;
+            $("#koujiInfo").html(koujiInfo);
+            var kikisysInfo = koujiFormData.valve.vNo + " ( " + koujiFormData.valve.benMeisyo + " ) / " + koujiFormData.kiki.kikiMei;
+            $("#kikisysInfo").html(kikisysInfo);
+            $("#kenanKoujiId").val(koujiFormData.koujiId);
+            $("#kenanKoujirelationId").val(koujiFormData.koujirelationId);
+            $("#kenanKikiId").val(koujiFormData.kikiId);
+            $("#kenanModal").modal();
+        });
+    }
+
+    function saveKenan(){
+        var datas = $(".kenanForm-input");
+        var kenanFormArray = new Array();
+        for(var i = 0;i<datas.length;i++){
+            kenanFormArray[i] = datas[i].value;
+        }
+        var kenanFormJson = JSON.stringify(kenanFormArray);
+        $.post("/kenan/saveKenanWithForm",{"kenanForm":kenanFormJson},function(data){
+            $("#kenanModal").modal("hide");
+        })
     }
 </script>
 </html>

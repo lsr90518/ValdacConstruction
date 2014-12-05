@@ -3,9 +3,11 @@ package com.toyo.vc.controller;
 import com.google.gson.Gson;
 import com.toyo.vc.entity.TenkenRireki;
 import com.toyo.vc.entity.TenkenRirekiUtil;
+import com.toyo.vc.entity.Valve;
 import com.toyo.vc.service.TenkenRirekiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -130,7 +132,7 @@ public class TenkenController {
                                               HttpSession session){
         List<TenkenRirekiUtil> tenkenRirekiUtilList = (List<TenkenRirekiUtil>) session.getAttribute("tenkenRirekiHistory");
         //page control
-        int countInOnePage = 2;
+        int countInOnePage = 10;
         int pageCount = 0;
         int currentIndex = countInOnePage * Integer.valueOf(currentPage);
         List<TenkenRirekiUtil> tenkenRirekiUtils = new ArrayList<TenkenRirekiUtil>();

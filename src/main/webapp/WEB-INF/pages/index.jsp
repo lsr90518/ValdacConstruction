@@ -139,9 +139,8 @@
 
                             <div class="row well-sm">
                                 <div class="col-md-12">
-                                    <ul class="nav nav-tabs nav-justified">
+                                    <ul class="nav nav-tabs">
                                         <li class="active"><a href="#timeline" data-toggle="tab">点検履歴</a></li>
-                                        <li class=""><a href="#kenanList" data-toggle="tab">懸案履歴</a></li>
 
                                     </ul>
                                 </div>
@@ -167,27 +166,6 @@
                                     </li>
                                 </c:forEach>
                             </ul>
-                            </div>
-                            <div class="tab-pane" id="kenanList">
-                                <ul class="timeline" >
-
-                                    <c:forEach items="${tenkenRirekiHistory}" var="tenkenRireki">
-                                        <li>
-                                            <!-- timeline icon -->
-                                            <i class="glyphicon glyphicon-floppy-saved bg-red"></i>
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="fa fa-clock-o"></i> ${tenkenRireki.updDate}</span>
-
-
-                                                <div class="timeline-body">
-                                                        ${tenkenRireki.valve.vNo} ( ${tenkenRireki.valve.benMeisyo} ) の
-                                                        ${tenkenRireki.kikiBunrui} ( ${tenkenRireki.kikiMei} ) -> ${tenkenRireki.tenkenRank} ( ${tenkenRireki.tenkenkekka} )
-                                                </div>
-
-                                            </div>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
                             </div>
                             </div>
                         </div>

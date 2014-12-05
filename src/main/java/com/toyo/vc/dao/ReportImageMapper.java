@@ -28,4 +28,6 @@ public interface ReportImageMapper {
     public void updateReportImage(ReportImage reportImage);
     /**画像を削除する*/
     public void deleteReportImage(ReportImage reportImage);
+
+    public ReportImage findReportImageByImagename(String imagename);
 }

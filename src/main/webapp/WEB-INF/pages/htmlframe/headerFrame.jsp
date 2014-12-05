@@ -32,7 +32,7 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/kouji/add">新規工事</a></li>
-                    <li><a href="#">工事一覧</a></li>
+                    <li><a href="/list">工事一覧</a></li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="glyphicon glyphicon-user"></i>

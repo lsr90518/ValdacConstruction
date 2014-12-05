@@ -1,5 +1,6 @@
 package com.toyo.vc.controller;
 
+import com.toyo.vc.dto.KenanForm;
 import com.toyo.vc.dto.KoujiForm;
 import com.toyo.vc.dto.ValveKikiSelectUtil;
 import com.toyo.vc.entity.*;
@@ -31,6 +32,8 @@ public class KoujiController {
     TenkenRirekiService tenkenRirekiService;
     @Autowired
     KenanService kenanService;
+    @Autowired
+    ReportImageService reportImageService;
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -113,8 +116,46 @@ public class KoujiController {
         modelMap.addAttribute("kouji",kouji);
 
         List<Kenan> kenanList = kenanService.getKenanByKoujiId(id);
-        modelMap.addAttribute("kenanList",kenanList);
+        List<KenanForm> kenanFormList = new ArrayList<KenanForm>();
+        for (int i = 0; i < kenanList.size(); i++) {
+            KenanForm kenanForm = new KenanForm();
+            kenanForm.setKouji(kouji);
+            Koujirelation koujirelation = koujirelationService.getKoujirelationById(kenanList.get(i).getKoujirelationId()+"");
+            Valve valve = itemService.getKikisysByKikisysId(koujirelation.getKikisysid()+"");
+            Kiki kiki = itemService.getKikiByKikiId(koujirelation.getKikiid()+"");
+            kenanForm.setValve(valve);
+            kenanForm.setKiki(kiki);
+            kenanForm.setKoujiId(kouji.getId());
+            kenanForm.setKikiId(kiki.getKikiId());
+            kenanForm.setKoujirelationId(koujirelation.getId());
+            kenanForm.setGensyo(kenanList.get(i).getGensyo());
+            kenanForm.setYouin(kenanList.get(i).getYouin());
+            kenanForm.setSyotiNaiyou(kenanList.get(i).getSyotiNaiyou());
+            kenanForm.setHakkenJyokyo(kenanList.get(i).getHakkenJyokyo());
+            kenanForm.setBuhin(kenanList.get(i).getBuhin());
+            kenanForm.setId(kenanList.get(i).getId());
+            kenanForm.setJisyo(kenanList.get(i).getJisyo());
+            kenanForm.setTaisaku(kenanList.get(i).getTaisaku());
+            kenanForm.setTaiouFlg(kenanList.get(i).getTaiouFlg());
+            kenanForm.setHakkenDate(kenanList.get(i).getHakkenDate());
+            kenanForm.setTaisakuDate(kenanList.get(i).getTaisakuDate());
+            kenanFormList.add(kenanForm);
+        }
+
+        session.setAttribute("kenanFormList",kenanFormList);
+
         return "/kouji/kenan";
+    }
+
+    @RequestMapping(value = "/{id}/image", method = RequestMethod.GET)
+    public String image(@PathVariable("id")String id,
+                        ModelMap modelMap,
+                        HttpSession session){
+        Kouji kouji = koujiService.getKoujiById(id);
+        List<ReportImage> reportImageList = reportImageService.getReportImageByKoujiId(id);
+        modelMap.addAttribute("kouji",kouji);
+        modelMap.addAttribute("imageList",reportImageList);
+        return "/kouji/image";
     }
 
     @RequestMapping(value = "/{id}/valve", method = RequestMethod.POST)

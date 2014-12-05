@@ -531,6 +531,53 @@ Component: timeline
     font-size: small;
 }
 
+
+/* image list */
+.previewDiv{
+    margin-top:50px;
+    text-align: center;
+}
+
+#imageList{
+    border-right:solid 5px #eee;
+    overflow-y: scroll;
+    height: 600px;
+}
+
+.btn.btn-file-block {
+    position: relative;
+    height: 35px;
+    overflow: hidden;
+}
+.btn.btn-file-block > input[type='file'] {
+    display: block !important;
+    width: 100% !important;
+    height: 35px !important;
+    opacity: 0 !important;
+    position: absolute;
+    top: -10px;
+    cursor: pointer;
+}
+
+.thumbnail-object {
+    padding: 10px;
+    border-bottom: dashed 1px #ddd;
+}
+
+.thumbnail-content {
+    height: 100px;
+}
+
+.thumbnail-content .imagesyu{
+    margin-bottom:45px;
+}
+
+.thumbnail-delete-btn{
+    opacity: 0;
+}
+
+
+
 /* Background colors */
 .bg-red,
 .bg-yellow,

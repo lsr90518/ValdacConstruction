@@ -1,9 +1,7 @@
 package com.toyo.vc.controller;
 
-import com.toyo.vc.entity.Kouji;
-import com.toyo.vc.entity.TenkenRireki;
-import com.toyo.vc.entity.TenkenRirekiUtil;
-import com.toyo.vc.entity.User;
+import com.toyo.vc.entity.*;
+import com.toyo.vc.service.KenanService;
 import com.toyo.vc.service.KoujiService;
 import com.toyo.vc.service.TenkenRirekiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,8 @@ public class IndexController {
     KoujiService koujiService;
     @Autowired
     TenkenRirekiService tenkenRirekiService;
+    @Autowired
+    KenanService kenanService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(HttpSession session, ModelMap modelMap){
@@ -37,8 +37,8 @@ public class IndexController {
             return "login";
         } else {
             if(user.getKengen().equals("6")){
-                List<Kouji> lastedKoujiList = koujiService.getLastedTenKoujiByPerson("zui");
-                List<Kouji> updatedKoujiList = koujiService.getUpdateTenKoujiByPerson("zui");
+                List<Kouji> lastedKoujiList = koujiService.getLastedTenKoujiByPerson(user.getUsername());
+                List<Kouji> updatedKoujiList = koujiService.getUpdateTenKoujiByPerson(user.getUsername());
                 modelMap.addAttribute("lastedKoujiList",lastedKoujiList);
                 modelMap.addAttribute("updatedKoujiList",updatedKoujiList);
                 List<TenkenRirekiUtil> tenkenRirekiList = tenkenRirekiService.getTenkenRirekiByKoujiId(lastedKoujiList.get(0).getId()+"");

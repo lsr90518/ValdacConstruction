@@ -10,6 +10,10 @@
         select * from reportImage where koujiId=#{koujiId} ORDER BY page;
     </select>
 
+    <select id="findReportImageByImagename" parameterType="String" resultType="ReportImage">
+        select * from reportImage where imagename=#{imagename}
+    </select>
+
     <insert id="insertReportImage" parameterType="ReportImage">
         insert into
         reportImage(koujiId,imagesyu,page,imagename,papersize,trkDate, updDate)

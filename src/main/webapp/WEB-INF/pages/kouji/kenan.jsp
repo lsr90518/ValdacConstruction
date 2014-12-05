@@ -44,37 +44,45 @@
 
         <div class="row">
             <div class="col-md-11">
-                <div class="panel panel-default progress-panel" id="tenkenRireki-content">
-                    <div class="panel-body">
-                        <div class="row progress-data-div">
-                            <div class="col-md-4">
-                                <i class="glyphicon glyphicon-inbox"> 未完成: <span id="incompleteNum"></span></i>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h4>懸案リスト</h4>
                             </div>
-                            <div class="col-md-4">
-                                <i class="glyphicon glyphicon-gift"> 完成: <span id="completeNum"></span></i>
-                            </div>
-                            <div class="col-md-4">
-                                <i class="glyphicon glyphicon-saved"> 全部: <span id="totalNum"></span></i>
-                            </div>
-                        </div>
-                        <div class="progress">
-                            <div id="percentProgress" class="progress-bar bg-red progress-bar-striped active" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-                                20%
+                            <div class="col-md-2">
+                                <input type="text" placeholder="keyword" onkeyup="searchDataTd(this)" class="pull-right form-control" />
                             </div>
                         </div>
                     </div>
-                    <table class="table table-hover kiki-table" id="kiki-table">
-                    </table>
-                    <div class="row">
-                        <input type="hidden" id="currentPage" value="0" />
-                        <div class="col-md-6">
-                            <nav>
-                                <ul id="pager" class="pagination">
-                                </ul>
-                            </nav>
-                        </div>
-
-                        <div class="col-md-6"></div>
+                    <div class="panel-body">
+                        <table class="table table-hover" id="kenan-table">
+                            <thead>
+                                <tr>
+                                    <th>弁番号</th>
+                                    <th>機器名</th>
+                                    <th>事象</th>
+                                    <th>部品</th>
+                                    <th>発見状況</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${kenanFormList}" var="kenanForm">
+                                    <tr class="data-tr" id="${kenanForm.id}">
+                                        <td class="data-td">${kenanForm.valve.vNo}</td>
+                                        <td class="data-td">${kenanForm.kiki.kikiMei}</td>
+                                        <td class="data-td">${kenanForm.gensyo}</td>
+                                        <td class="data-td">${kenanForm.buhin}</td>
+                                        <td class="data-td">${kenanForm.hakkenJyokyo}</td>
+                                        <td>
+                                            <button onclick="editKenan(this)" class="btn btn-xs btn-default bg-red-gradient"><i class="fa fa-edit"> </i></button>
+                                            <a href="/kenan/${kenanForm.id}/delete" class="btn btn-xs btn-default bg-blue-gradient"><i class="glyphicon glyphicon-trash"> </i></a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div><!-- information tab -->
@@ -82,10 +90,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-pills nav-stacked bookmarkUl">
-                            <li role="presentation" ><a href="/kouji/${kouji.id}">情報</a></li>
-                            <li role="presentation" class="currentBookmark"><a href="/kouji/${kouji.id}/instruct">指示</a></li>
-                            <li role="presentation"><a href="/kouji/${kouji.id}/kenan">懸案</a></li>
-                            <li role="presentation"><a href="/kouji/${kouji.id}/history">履歴</a></li>
+                            <li role="presentation" ><a href="/kouji/${kouji.id}"><i class="glyphicon glyphicon-cog"> </i></a></li>
+                            <li role="presentation"><a href="/kouji/${kouji.id}/instruct"><i class="glyphicon glyphicon-indent-left"> </i></a></li>
+                            <li role="presentation" class="currentBookmark"><a href="/kouji/${kouji.id}/kenan"><i class="glyphicon glyphicon-floppy-save"> 懸案</i></a></li>
+                            <li role="presentation"><a href="/kouji/${kouji.id}/history"><i class="glyphicon glyphicon-time"> </i></a></li>
+                            <li role="presentation"><a href="/kouji/${kouji.id}/image"><i class="glyphicon glyphicon-picture"> </i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -95,138 +104,141 @@
 </div>
 </body>
 
+<!-- Modal -->
+<div class="modal fade" id="kenanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">懸案追加</h4>
+            </div>
+            <div class="modal-body">
+                <form id="kenanForm" action="/kenan/updateKenan" name="kenanForm" method="post">
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <h3>
+                                <i class="glyphicon glyphicon-wrench"> <span class="kenanForm-span" id="koujiInfo"></span></i>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <span class="kenanForm-span" id="kikisysInfo"></span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="kenanId" class="kenanForm-input" name="id" value="" />
+                    <input type="hidden" id="kenanKoujiId" class="kenanForm-input" name="koujiId" value="" />
+                    <input type="hidden" id="kenanKoujirelationId" class="kenanForm-input" name="koujirelationId" value="" />
+                    <input type="hidden" id="kenanKikiId" class="kenanForm-input" name="kikiId" value="" />
+
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">懸案状況</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row form-group">
+                                <div class="col-md-3">
+                                    <input type="text" name="jisyo" id="jisyo" class="form-control kenanForm-input" value="" placeholder="事象" />
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" name="buhin" id="buhin" class="form-control kenanForm-input" value="" placeholder="部品" />
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" name="gensyo" id="gensyo" class="form-control kenanForm-input" value="" placeholder="現象" />
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" name="taisaku" id="taisaku" class="form-control kenanForm-input" value="" placeholder="対策" />
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <input type="text" name="hakkenJyokyo" id="hakkenJyokyo" class="form-control kenanForm-input" value="" placeholder="発見状況" />
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" name="youin" id="youin" class="form-control kenanForm-input" value="" placeholder="要因" />
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" name="syotiNaiyou" id="syotiNaiyou" class="form-control kenanForm-input" value="" placeholder="処置内容" />
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <input type="text" name="hakkenDate" id="hakkenDate" class="form-control kenanForm-input" value="" placeholder="発見日付" />
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" name="taisakuDate" id="taisakuDate" class="form-control kenanForm-input" value="" placeholder="対策日付" />
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" name="taiouFlg" id="taiouFlg" class="form-control kenanForm-input" value="" placeholder="対応" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="updateKenan()" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
-    $(document).ready(function(){
-
-        updateListNumbers();
-
-        var currentPage = $("#currentPage").val();
-        $.get("/tenken/getTenkenrirekiByPage",{"currentPage":currentPage},function(data){
-            var datas = JSON.parse(data);
-            $("#kiki-table").html("");
-            var tmpHtml = '<tr class="bg-gray">'+
-                    '<th>弁番号</th>'+
-                    '<th>弁名称</th>'+
-                    '<th>機器分類</th>'+
-                    '<th>機器名称</th>'+
-                    '<th>型式番号</th>'+
-                    '<th>点検内容</th>'+
-                    '</tr>';
-            for(var i = 0;i<datas.tenkenRirekiList.length;i++){
-                var kikiStatus = "";
-
-                tmpHtml = tmpHtml + '<tr id="'+datas.tenkenRirekiList[i].id+'" class="'+kikiStatus+'">'+
-                        '<td>'+datas.tenkenRirekiList[i].valve.vNo+'</td>'+
-                        '<td>'+datas.tenkenRirekiList[i].valve.benMeisyo+'</td>'+
-                        '<td>'+datas.tenkenRirekiList[i].kikiBunrui+'</td>'+
-                        '<td>'+datas.tenkenRirekiList[i].kikiMei+'</td>'+
-                        '<td>'+datas.tenkenRirekiList[i].katasikiNo+'</td>'+
-                        '<td>'+
-                        '<select class="form-control tenken-select" onchange="saveTenkennaiyo(this)">'+
-                        '<option>'+datas.tenkenRirekiList[i].tenkennaiyo+'</option>'+
-                        '<option>A</option>'+
-                        '<option>B</option>'+
-                        '<option>C</option>'+
-                        '<option>D</option>'+
-                        '<option>E</option>'+
-                        '<option>F</option>'+
-                        '</select>'+
-                        '</td>'+
-                        '</tr>'
-            }
-            $("#kiki-table").html(tmpHtml);
-
-            $("#currentPage").val(datas.currentPage+1);
-            $("#pager").html("");
-            var pageHtml = "";
-            for(var i = 0;i < datas.pageCount;i++){
-                var tmpPage = i+1;
-                if(datas.currentPage == i){
-                    pageHtml = pageHtml + '<li class="active"><a href="#tenkenRireki-content" onclick="changePage(this)">' + tmpPage + '</a></li>';
-
-                } else {
-                    pageHtml = pageHtml + '<li><a href="#tenkenRireki-content" onclick="changePage(this)">' + tmpPage + '</a></li>';
-                }
-            }
-            $("#pager").html(pageHtml);
-
-        });
-    });
-
-    function saveTenkennaiyo(obj){
-        var rireki = $(obj).parent().parent();
-        var rirekiId = rireki[0].id;
-        $.post("/tenken/saveTenkennaiyo",{"id":rirekiId,"tenkennaiyo":obj.value},function(data){
-            updateListNumbers();
+    function editKenan(obj){
+        var kenanTr = $(obj).parent().parent();
+        var kenanId = kenanTr[0].id;
+        console.log(kenanId);
+        $.get("/kenan/getKenanByIdInSession",{"id":kenanId},function(data){
+            var koujiFormData = JSON.parse(data);
+            $(".kenanForm-input").val("");
+            var koujiInfo = koujiFormData.kouji.kjNo + "/" + koujiFormData.kouji.kjMeisyo;
+            $("#koujiInfo").html(koujiInfo);
+            var kikisysInfo = koujiFormData.valve.vNo + " ( " + koujiFormData.valve.benMeisyo + " ) / " + koujiFormData.kiki.kikiMei;
+            $("#kikisysInfo").html(kikisysInfo);
+            $("#kenanId").val(kenanId);
+            $("#kenanKoujiId").val(koujiFormData.koujiId);
+            $("#kenanKoujirelationId").val(koujiFormData.koujirelationId);
+            $("#kenanKikiId").val(koujiFormData.kikiId);
+            $("#jisyo").val(koujiFormData.jisyo);
+            $("#buhin").val(koujiFormData.buhin);
+            $("#gensyo").val(koujiFormData.gensyo);
+            $("#taisaku").val(koujiFormData.taisaku);
+            $("#hakkenJyokyo").val(koujiFormData.hakkenJyokyo);
+            $("#youin").val(koujiFormData.youin);
+            $("#syotiNaiyou").val(koujiFormData.syotiNaiyou);
+            $("#hakkenDate").val(koujiFormData.hakkenDate);
+            $("#taisakuDate").val(koujiFormData.taisakuDate);
+            $("#taiouFlg").val(koujiFormData.taiouFlg);
+            $("#kenanModal").modal();
         })
     }
 
-    function updateListNumbers(){
-        $.get("/tenken/getNaiyoNumbers",function(data){
-            var datas = JSON.parse(data);
-            $("#totalNum").html(datas.total);
-            $("#incompleteNum").html(datas.incomplete);
-            $("#completeNum").html(datas.complete);
-
-            var percent = datas.complete / datas.total;
-            percent = percent*100;
-            $("#percentProgress").css({"width":percent+"%"});
-            $("#percentProgress").html(percent+"%");
-        })
-    }
-
-    function changePage(obj){
-        var currentPage = $("#currentPage").val();
-        $.get("/tenken/getTenkenrirekiByPage",{"currentPage":currentPage},function(data){
-            var datas = JSON.parse(data);
-            $("#kiki-table").html("");
-            var tmpHtml = '<tr class="bg-gray">'+
-                    '<th>弁番号</th>'+
-                    '<th>弁名称</th>'+
-                    '<th>機器分類</th>'+
-                    '<th>機器名称</th>'+
-                    '<th>型式番号</th>'+
-                    '<th>点検内容</th>'+
-                    '</tr>';
-            for(var i = 0;i<datas.tenkenRirekiList.length;i++){
-                var kikiStatus = "";
-
-                tmpHtml = tmpHtml + '<tr id="'+datas.tenkenRirekiList[i].id+'" class="'+kikiStatus+'">'+
-                        '<td>'+datas.tenkenRirekiList[i].valve.vNo+'</td>'+
-                        '<td>'+datas.tenkenRirekiList[i].valve.benMeisyo+'</td>'+
-                        '<td>'+datas.tenkenRirekiList[i].kikiBunrui+'</td>'+
-                        '<td>'+datas.tenkenRirekiList[i].kikiMei+'</td>'+
-                        '<td>'+datas.tenkenRirekiList[i].katasikiNo+'</td>'+
-                        '<td>'+
-                        '<select class="form-control tenken-select" onchange="saveTenkennaiyo(this)">'+
-                        '<option>'+datas.tenkenRirekiList[i].tenkennaiyo+'</option>'+
-                        '<option>A</option>'+
-                        '<option>B</option>'+
-                        '<option>C</option>'+
-                        '<option>D</option>'+
-                        '<option>E</option>'+
-                        '<option>F</option>'+
-                        '</select>'+
-                        '</td>'+
-                        '</tr>'
-            }
-            $("#kiki-table").html(tmpHtml);
-
-            $("#currentPage").val(datas.currentPage+1);
-            $("#pager").html("");
-            var pageHtml = "";
-            for(var i = 0;i < datas.pageCount;i++){
-                var tmpPage = i+1;
-                if(datas.currentPage == i){
-                    pageHtml = pageHtml + '<li class="active"><a href="#tenkenRireki-content" onclick="changePage(this)">' + tmpPage + '</a></li>';
-
-                } else {
-                    pageHtml = pageHtml + '<li><a href="#tenkenRireki-content" onclick="changePage(this)">' + tmpPage + '</a></li>';
+    function searchDataTd(obj){
+        if(obj.value.length < 1){
+            $(".data-tr").show();
+        }
+        var dataTr = $(".data-tr");
+        var keyword = new String(obj.value);
+        for(var i = 0;i<dataTr.length;i++){
+            $(dataTr[i]).hide();
+            var dataTd = $(dataTr[i]).find(".data-td");
+            for(var j = 0;j<dataTd.length;j++){
+                var htmlData = new String(dataTd[j].innerHTML);
+                if(htmlData.indexOf(keyword) > -1){
+                    $(dataTr[i]).show();
+                    break;
                 }
             }
-            $("#pager").html(pageHtml);
-
-        });
+        }
     }
+
+    function updateKenan(){
+        $("#kenanForm").submit();
+    }
+
 </script>
 </html>

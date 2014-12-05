@@ -53,10 +53,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-pills nav-stacked bookmarkUl">
-                            <li role="presentation"><a href="/kouji/${kouji.id}">情報</a></li>
-                            <li role="presentation"><a href="/kouji/${kouji.id}/instruct">指示</a></li>
-                            <li role="presentation"><a href="/kouji/${kouji.id}/kenan">懸案</a></li>
-                            <li role="presentation" class="currentBookmark"><a href="/kouji/${kouji.id}/history">履歴</a></li>
+                            <li role="presentation"><a href="/kouji/${kouji.id}"><i class="glyphicon glyphicon-cog"> </i></a></li>
+                            <li role="presentation"><a href="/kouji/${kouji.id}/instruct"><i class="glyphicon glyphicon-indent-left"></i></a></li>
+                            <li role="presentation"><a href="/kouji/${kouji.id}/kenan"><i class="glyphicon glyphicon-floppy-save"> </i></a></li>
+                            <li role="presentation" class="currentBookmark"><a href="/kouji/${kouji.id}/history"><i class="glyphicon glyphicon-time"> 履歴</i></a></li>
+                            <li role="presentation"><a href="/kouji/${kouji.id}/image"><i class="glyphicon glyphicon-picture"> </i></a></li>
                         </ul>
                     </div>
                 </div>
