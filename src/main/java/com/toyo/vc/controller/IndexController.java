@@ -41,9 +41,13 @@ public class IndexController {
                 List<Kouji> updatedKoujiList = koujiService.getUpdateTenKoujiByPerson(user.getUsername());
                 modelMap.addAttribute("lastedKoujiList",lastedKoujiList);
                 modelMap.addAttribute("updatedKoujiList",updatedKoujiList);
-                List<TenkenRirekiUtil> tenkenRirekiList = tenkenRirekiService.getTenkenRirekiByKoujiId(lastedKoujiList.get(0).getId()+"");
-                if(tenkenRirekiList.size()>10){
-                    tenkenRirekiList = tenkenRirekiList.subList(0,10);
+
+                List<TenkenRirekiUtil> tenkenRirekiList=null;
+                if(lastedKoujiList.size()>0){
+                    tenkenRirekiList = tenkenRirekiService.getTenkenRirekiByKoujiId(lastedKoujiList.get(0).getId()+"");
+                    if(tenkenRirekiList.size()>10){
+                        tenkenRirekiList = tenkenRirekiList.subList(0,10);
+                    }
                 }
                 modelMap.addAttribute("tenkenRirekiHistory",tenkenRirekiList);
 
@@ -52,9 +56,13 @@ public class IndexController {
                 List<Kouji> updatedKoujiList = koujiService.getUpdateTenKoujiByPerson(user.getUserid());
                 modelMap.addAttribute("lastedKoujiList",lastedKoujiList);
                 modelMap.addAttribute("updatedKoujiList",updatedKoujiList);
-                List<TenkenRirekiUtil> tenkenRirekiList = tenkenRirekiService.getTenkenRirekiByKoujiId(lastedKoujiList.get(0).getId()+"");
-                if(tenkenRirekiList.size()>10){
-                    tenkenRirekiList = tenkenRirekiList.subList(0,10);
+
+                List<TenkenRirekiUtil> tenkenRirekiList=null;
+                if(lastedKoujiList.size()>0){
+                    tenkenRirekiList = tenkenRirekiService.getTenkenRirekiByKoujiId(lastedKoujiList.get(0).getId()+"");
+                    if(tenkenRirekiList.size()>10){
+                        tenkenRirekiList = tenkenRirekiList.subList(0,10);
+                    }
                 }
                 modelMap.addAttribute("tenkenRirekiHistory",tenkenRirekiList);
             }
